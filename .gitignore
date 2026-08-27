@@ -6,8 +6,11 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+<<<<<<< HEAD
 
 .env.qa
 OthersFile/
 test-data/Others/
 tests/Open_Source/
+=======
+>>>>>>> b349b79a4fbb30d72239a513baeec2380a252eac
