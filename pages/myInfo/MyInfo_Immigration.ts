@@ -1,10 +1,9 @@
 import { Page, Locator, expect} from "@playwright/test";
-import { MyInfoImmigration, MyInfoImmigrations_AttachFile } from "../../types/MyInfo/MyInfo_Immigration";
+import { MyInfoImmigration } from "../../types/MyInfo/MyInfo_Immigration";
 
 
 export class MyInfoImmigrationsTab {
 readonly page: Page
-readonly tabRole: Locator
 readonly document: Locator
 readonly addImmigrationButton: Locator
 readonly number: Locator
@@ -24,7 +23,6 @@ readonly attachmentSaveButton: Locator
     constructor(page: Page){
 
 this.page = page;
-this.tabRole =page.locator('.orangehrm-tabs');
 this.addImmigrationButton = page.locator('.orangehrm-action-header').filter({hasText: 'Assigned Immigration Records'}).getByRole('button', {name: "Add"});
 this.document =page.locator('.oxd-input-group');
 this.number = page .locator('.oxd-input-group').filter({ hasText: 'Number' }).locator('input');
@@ -43,7 +41,6 @@ this.attachmentSaveButton = page.locator('form').filter({ hasText: 'Select File'
 
 }
 async addImmigration(data: MyInfoImmigration){
-    await this.tabRole.getByRole('tab', {name:data.immigration}).click();
     await this.addImmigrationButton.click();
     const documentId = this.document.filter({hasText: new RegExp(`^${data.document}$`)}).locator('.oxd-radio-input');
     await documentId.setChecked(true);
@@ -60,10 +57,4 @@ async addImmigration(data: MyInfoImmigration){
     
 }
 
- async addAttachment(data:MyInfoImmigrations_AttachFile){
-    await this.attachmentAddButton.click();
-    await this.attachment.setInputFiles(data.attachmentImmigrations);
-    await this.attachmentComment.fill(data.commentImmigrations);
-    await this.attachmentSaveButton.click();
-}
 }

@@ -4,7 +4,6 @@ import { MyInfoQualifications_Education, MyInfoQualifications_Experience, MyInfo
 
 export class MyInfoQualificationsTab {
 readonly page: Page
-readonly tabRole: Locator
 //experience
 readonly addWorkExperienceButton: Locator
 readonly company: Locator
@@ -44,18 +43,13 @@ readonly licenseNumber: Locator
 readonly issuedDate: Locator
 readonly expiryDate: Locator
 readonly licenseSaveButton: Locator
-//attachment
-readonly addAttachmentButton: Locator
-readonly attachment: Locator
-readonly attachmentComment: Locator
-readonly attachmentSaveButton: Locator
+
 
 
 
     constructor(page: Page){
 
 this.page = page;
-this.tabRole =page.locator('.orangehrm-tabs');
 //experience
 this.addWorkExperienceButton = page.locator('.orangehrm-action-header').filter({hasText: 'Work Experience'}).getByRole('button', {name: "Add"});
 this.company = page .locator('.oxd-input-group').filter({ hasText: 'Company' }).locator('input');
@@ -103,7 +97,6 @@ this.attachmentSaveButton = page.locator('form').filter({ hasText: 'Select File'
 }
 
 async addQualifications_Experience(data: MyInfoQualifications_Experience){
-    await this.tabRole.getByRole('tab', {name:data.qualification}).click();
     await this.addWorkExperienceButton.click();
     await this.company.fill(data.company);
     await this.jobTitle.fill(data.jobTitle);
@@ -159,10 +152,10 @@ async addQualifications_License(data: MyInfoQualifications_License){
     await this.licenseSaveButton.click();
 }
 
- async addAttachment(data:MyInfoQualifications_AttachFile){
-    await this.addAttachmentButton.click();
-    await this.attachment.setInputFiles(data.attachmentQualifications);
-    await this.attachmentComment.fill(data.commentQualifications);
-    await this.attachmentSaveButton.click();
-}
+//  async addAttachment(data:MyInfoQualifications_AttachFile){
+//     await this.addAttachmentButton.click();
+//     await this.attachment.setInputFiles(data.attachmentQualifications);
+//     await this.attachmentComment.fill(data.commentQualifications);
+//     await this.attachmentSaveButton.click();
+// }
 }

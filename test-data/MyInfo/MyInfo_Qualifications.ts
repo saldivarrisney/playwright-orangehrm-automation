@@ -34,7 +34,3 @@ export const myInfoQualifications_License= {
     expiryDate: '2999-10-10',
 }
 
-export const myInfoQualifications_AttachFile = {
-    attachmentQualifications: 'test-data/files/demo.jpg',
-    commentQualifications: 'Demo Testing only-Qualifications',
-}

@@ -12,7 +12,3 @@ export type MyInfoContactDetails = {
     workEmail:string;
     otherEmail:string;
 }
-export type MyInfoContactDetails_AttachFile = {
-    attachmentContactDetails: string;
-    commentContactDetails: string;
-}

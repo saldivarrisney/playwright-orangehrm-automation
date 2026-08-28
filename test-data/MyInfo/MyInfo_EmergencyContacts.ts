@@ -6,8 +6,3 @@ export const myInfoEmergencyContacts = {
     mobile: '1444-44',
     workTelephone: '155-555-5',
 }
-export const myInfoEmergencyContacts_AttachFile = {
-    attachmentEmergencyContacts: 'test-data/files/demo.jpg',
-    commentEmergencyContacts: 'Demo Testing only-Emergency Contacts',
-
-}

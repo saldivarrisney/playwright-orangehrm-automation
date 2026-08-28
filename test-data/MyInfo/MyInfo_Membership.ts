@@ -8,7 +8,3 @@ export const myInfoMembership= {
     subscriptionRenewalDate: '2021-10-10',
 }
 
-export const myInfoMembership_AttachFile = {
-    attachmentMembership: 'test-data/files/ImmigrationTesting.pdf',
-    commentMembership: 'Demo Testing only-Immigrations',
-    }

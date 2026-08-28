@@ -1,9 +1,8 @@
 import { Page, Locator, expect} from "@playwright/test";
-import { MyInfoEmergencyContacts, MyInfoEmergencyContacts_AttachFile} from "../../types/MyInfo/MyInfo_EmergencyContacts";
+import { MyInfoEmergencyContacts} from "../../types/MyInfo/MyInfo_EmergencyContacts";
 
 export class MyInfoEmergencyContactsTab {
 readonly page: Page
-readonly tabRole: Locator
 readonly addEmergencyContactButton: Locator
 readonly name: Locator
 readonly relationship: Locator
@@ -19,7 +18,6 @@ readonly saveAttachmentButton: Locator
 
     constructor(page: Page){
 this.page = page;
-this.tabRole =page.locator('.orangehrm-tabs');
 this.addEmergencyContactButton = page.locator('.orangehrm-action-header').filter({hasText: 'Emergency Contact'}).getByRole('button', {name: "Add"});
 this.name = page .locator('.oxd-input-group').filter({ hasText: 'Name' }).locator('input');
 this.relationship = page .locator('.oxd-input-group').filter({ hasText: 'Relationship' }).locator('input');
@@ -34,8 +32,7 @@ this.saveAttachmentButton = page.locator('form').filter({ hasText: 'Select File'
 
 
 }
-async updateEmergencyContacts(data: MyInfoEmergencyContacts){
-    await this.tabRole.getByRole('tab', {name:data.emergencyContacts}).click();
+async addEmergencyContacts(data: MyInfoEmergencyContacts){
     await this.addEmergencyContactButton.click();
     await this.name.click();
     await this.name.fill(data.name);
@@ -46,10 +43,5 @@ async updateEmergencyContacts(data: MyInfoEmergencyContacts){
     await this.saveEmergencyContactsButton.click();
 
 }
- async addAttachment(data:MyInfoEmergencyContacts_AttachFile){
-    await this.addAttachmentButton.click();
-    await this.attachment.setInputFiles(data.attachmentEmergencyContacts);
-    await this.comment.fill(data.commentEmergencyContacts);
-    await this.saveAttachmentButton.click();
- }
+
 }

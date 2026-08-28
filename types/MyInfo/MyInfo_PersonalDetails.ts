@@ -19,5 +19,5 @@ export type MyInfoPersonalDetails_CustomFields = {
 export type MyInfoPersonalAndContact_AttachFile = {
     attachmentPersonalDetails: string;
     commentPersonalDetails: string;
-}
 
+}

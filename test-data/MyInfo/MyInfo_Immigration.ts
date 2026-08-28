@@ -9,9 +9,6 @@ export const myInfoImmigration = {
     eligibleReviewDate: '2020-12-12',
     comments:'Immigraton-Testing',
 }
-export const myInfoImmigrations_AttachFile = {
-    attachmentImmigrations: 'test-data/files/ImmigrationTesting.pdf',
-    commentImmigrations: 'Demo Testing only-Immigrations',
-}
+
 
     

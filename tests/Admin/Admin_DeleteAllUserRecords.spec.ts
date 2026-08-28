@@ -2,20 +2,18 @@ import { ENV_SouceDemo } from '../../config/env';
 import { test, expect } from '@playwright/test';
 import { LoginFeature } from "../../pages/login/OpenSource_Login";
 import { LoginDataScenarios } from "../../test-data/Login/OpenSource_Login";
-import { OpenSource_ToastMessage } from "../../components/MyInfo_ToastMessage";
+import { OpenSource_ToastMessage } from "../../components/OpenSource_ToastMessage";
 import { addAdminUser, addNonAdminUser, navigateCreationOfUSer } from "../../test-data/admin/Admin_UserManagement";
 import { AdminFeatures } from "../../pages/admin/Admin_UserManagementAddUser";
-import { OpenSource_Functionalities } from "../../components/MyInfo_Fuctionalities";
 import { MyInfoPersonalDetailsTab } from '../../pages/myInfo/MyInfo_PersonalDetails';
 import { OpenSource_MenuFilter } from '../../components/OpenSource_MenuFilter';
-import { menuFilter } from '../../test-data/OpenSource_MenuFilter';
+import { menuFilter } from '../../test-data/components/OpenSource_Components';
 import { myInfoPersonalDetails } from '../../test-data/MyInfo/MyInfo_PersonalDetails';
 
 test.describe('Delete Fucntionalities', () =>{
     let loginFeature: LoginFeature;
     let adminFeatures: AdminFeatures;
     let openSource_ToastMessage: OpenSource_ToastMessage;
-    let openSource_Functionalities: OpenSource_Functionalities;
     let myInfoPersonalDetailsTab: MyInfoPersonalDetailsTab;
     let openSource_MenuFilter: OpenSource_MenuFilter;
 
@@ -23,7 +21,6 @@ test.beforeEach(async ({page}) => {
     loginFeature = new LoginFeature(page);
     adminFeatures = new AdminFeatures(page);
     openSource_ToastMessage = new OpenSource_ToastMessage(page);
-    openSource_Functionalities = new OpenSource_Functionalities(page);
     myInfoPersonalDetailsTab = new MyInfoPersonalDetailsTab(page);
     openSource_MenuFilter = new OpenSource_MenuFilter(page);
 

@@ -1,9 +1,8 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoMembership, MyInfoMembership_AttachFile } from "../../types/MyInfo/MyInfo_Membership";
+import { MyInfoMembership } from "../../types/MyInfo/MyInfo_Membership";
 
 export class MyInfoMembershipTab {
 readonly page: Page
-readonly tabRole: Locator
 readonly membership: Locator
 readonly addMembershipButton: Locator
 readonly subscriptionPaidBy: Locator
@@ -21,7 +20,6 @@ readonly attachmentSaveButton: Locator
     constructor(page: Page){
 
 this.page = page;
-this.tabRole =page.locator('.orangehrm-tabs');
 this.addMembershipButton = page.locator('.orangehrm-action-header').filter({hasText: 'Assigned Memberships'}).getByRole('button', {name: "Add"});
 this.membership = page .locator('.oxd-input-group').filter({ hasText: 'Membership' }).locator('.oxd-select-text-input');
 this.selectDropdown= page.getByRole('listbox');
@@ -38,7 +36,6 @@ this.attachmentSaveButton = page.locator('form').filter({ hasText: 'Select File'
 
 }
 async addMembership(data: MyInfoMembership){
-    await this.tabRole.getByRole('tab', {name:data.memberships}).click();
     await this.addMembershipButton.click();
     await this.membership.pressSequentially(data.membership);
     await this.selectDropdown.getByRole('option', {name: data.membership}).click();
@@ -50,12 +47,6 @@ async addMembership(data: MyInfoMembership){
     await this.subscriptionCommenceDate.fill(data.subscriptionCommenceDate);
     await this.subscriptionRenewalDate.fill(data.subscriptionRenewalDate);
     await this.saveMembershipButton.click();
-}
 
- async addAttachment(data:MyInfoMembership_AttachFile){
-    await this.attachmentAddButton.click();
-    await this.attachment.setInputFiles(data.attachmentMembership);
-    await this.attachmentComment.fill(data.commentMembership);
-    await this.attachmentSaveButton.click();
 }
 }

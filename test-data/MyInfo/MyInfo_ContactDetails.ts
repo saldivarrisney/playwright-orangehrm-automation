@@ -12,7 +12,3 @@ export const myInfoContactDetails = {
     workEmail:'test@test.com',
     otherEmail:'test@test1.com',
 }
-export const myInfoContactDetails_AttachFile = {
-    attachmentContactDetails: 'test-data/files/demo.jpg',
-    commentContactDetails: 'Demo Testing only-Contact Details',
-}

@@ -1,11 +1,8 @@
 import { Page, Locator, expect} from "@playwright/test";
-import { MyInfoPersonalAndContact_AttachFile, MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/MyInfo_PersonalDetails";
+import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/MyInfo_PersonalDetails";
 
 export class MyInfoPersonalDetailsTab{
 readonly page: Page
-
-readonly filtergrid: Locator
-
 readonly firstName: Locator
 readonly middleName: Locator
 readonly lastName: Locator
@@ -29,7 +26,6 @@ readonly tabRole: Locator
 
     constructor(page: Page){
 this.page = page;
-this.filtergrid = page.getByPlaceholder("Search");
 this.firstName = page.getByPlaceholder("First Name");
 this.middleName = page.getByPlaceholder("Middle Name");
 this.lastName= page.getByPlaceholder("Last Name");
@@ -55,7 +51,6 @@ this.tabRole =page.locator('.orangehrm-tabs');
 
 
 async updatePersonalDetails(data:MyInfoPersonalDetails){
-    await this.tabRole.getByRole('tab', {name: data.personalDetailsTab}).click();
     await this.firstName.click();
     await this.firstName.fill(data.firstName);
     await this.middleName.fill(data.middleName);
@@ -76,13 +71,6 @@ async updateCustomFields(data:MyInfoPersonalDetails_CustomFields){
     await this.selectDropdown.getByRole('option', {name: data.bloodType,exact: true }).click();
     await this.testField.fill(data.testField)
     await this.customFieldsSaveButton.click();
-}
-async addAttachment(data:MyInfoPersonalAndContact_AttachFile){
-    await this.addButton.click();
-    await this.attachment.setInputFiles(data.attachmentPersonalDetails);
-    await this.comment.fill(data.commentPersonalDetails);
-    await this.AttachmentSaveButton.click();
-
 }
 
 

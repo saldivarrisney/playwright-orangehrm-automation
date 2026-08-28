@@ -17,7 +17,3 @@ export const myInfoCustomFields = {
    bloodType: 'B+',
    testField: 'Project Demo',
 }
-export const myInfoAttachFile = {
-    attachmentPersonalDetails: 'test-data/files/demo.jpg',
-    commentPersonalDetails: 'Demo Testing only-Personal Details',
-}
