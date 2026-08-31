@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
+import { ENV_OpenSource } from './config/env';
 
-dotenv.config({ path: '.env.qa' });
+
 // console.log('BASE_URL =', process.env.BASE_URL) -kung gusto makita url text
 /**
  * Read environment variables from file.
@@ -32,10 +32,13 @@ export default defineConfig({
         }]
     ],  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-        baseURL: process.env.BASE_URL,
+        baseURL: ENV_OpenSource.openSource_url,
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
-        trace: 'retain-on-failure'
+        trace: 'retain-on-failure',
+        headless: true,
+        actionTimeout: 10_000,
+        navigationTimeout: 30_000,
 
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',

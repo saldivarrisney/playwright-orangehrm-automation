@@ -15,3 +15,15 @@ export type AttachmentFields = {
    attachmentFile: string;
    attachmentComment: string;
 }
+export type TitleHeader = {
+   headerPersonalDetails: string
+   headerContactDetails: string;
+   headerEmergencyContacts: string;
+   headerDependents: string;
+   headerImmigration: string;
+   headerQualification: string;
+   headerMembership: string;
+   loginHeader: string;
+   headerAdmin: string;
+
+}

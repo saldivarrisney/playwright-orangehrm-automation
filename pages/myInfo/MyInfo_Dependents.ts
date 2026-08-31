@@ -1,43 +1,36 @@
 import { Page, Locator} from "@playwright/test";
 import { MyInfoDependents } from "../../types/MyInfo/MyInfo_Dependents";
+import { BasePage } from "../BasePage";
 
 
-export class MyInfoDependentsTab {
-readonly page: Page
-readonly addDependentButton: Locator
-readonly name: Locator
-readonly relationship: Locator
-readonly selectDropdown: Locator
-readonly birthdate: Locator
-readonly saveDependentButton: Locator
-readonly addAttachmentButton: Locator
-readonly attachment: Locator
-readonly comment: Locator
-readonly saveAttachmentButton: Locator
+export class MyInfoDependentsTab extends BasePage {
+private readonly addDependentButton: Locator
+private readonly name: Locator
+private readonly relationship: Locator
+private readonly selectDropdown: Locator
+private readonly birthdate: Locator
+private readonly saveDependentButton: Locator 
+
 
 
     constructor(page: Page){
-this.page = page;
+super(page);
 this.addDependentButton = page.locator('.orangehrm-action-header').filter({hasText: 'Assigned Dependents'}).getByRole('button', {name: "Add"});
 this.name = page .locator('.oxd-input-group').filter({ hasText: 'Name' }).locator('input');
 this.selectDropdown =page.locator('.oxd-input-group').getByRole('listbox');
 this.relationship = page .locator('.oxd-input-group').filter({ hasText: 'Relationship' }).locator('.oxd-select-text-input');
 this.birthdate = page .locator('.oxd-input-group').filter({ hasText: 'Date of Birth' }).locator('input');
 this.saveDependentButton = page.locator('form').filter({ hasText: 'Name' }).getByRole('button',{name: 'Save'});
-this.addAttachmentButton = page.locator('.orangehrm-action-header').filter({hasText: 'Attachments'}).getByRole('button', {name: "Add"});
-this.attachment = page.locator('input[type="file"]');
-this.comment = page.getByPlaceholder("Type comment here");
-this.saveAttachmentButton= page.locator('form').filter({ hasText: 'Select File' }).getByRole('button',{name: 'Save'});
 
 }
-async addDepedents(data: MyInfoDependents){
-    await this.addDependentButton.click();
-    await this.name.click();
-    await this.name.fill(data.name);
-    await this.relationship.pressSequentially(data.relationship);
+async addDependents(data: MyInfoDependents){
+    await this.click(this.addDependentButton);
+    await this.click(this.name);
+    await this.fill(this.name, data.name);
+    await this.pressSequentially(this.relationship, data.relationship);
     await this.selectDropdown.getByRole('option', {name: data.relationship, exact:true}).click();
-    await this.birthdate.fill(data.dateOfBirth);
-    await this.saveDependentButton.click();
+    await this.fill(this.birthdate, data.dateOfBirth);
+    await this.click(this.saveDependentButton);
 }
 
 }

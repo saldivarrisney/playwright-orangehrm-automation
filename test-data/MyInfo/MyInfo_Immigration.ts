@@ -1,5 +1,4 @@
 export const myInfoImmigration = {
-    immigration:'Immigration',
     document: 'Visa',
     number: '10-11-12-1345-678',
     issuedDate: '2020-12-12',

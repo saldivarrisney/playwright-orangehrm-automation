@@ -1,5 +1,4 @@
-export type MyInfoQualifications_Experience= {
-    qualification: string;
+export type Experience= {
     company: string;
     jobTitle: string;
     from: string;
@@ -7,7 +6,7 @@ export type MyInfoQualifications_Experience= {
     comment: string;
 }
 
-export type MyInfoQualifications_Education= {
+export type Education= {
     level: string;
     institute: string;
     majorSpecialization: string;
@@ -16,25 +15,21 @@ export type MyInfoQualifications_Education= {
     startDate: string;
     endDate: string;
 }
-export type MyInfoQualifications_Skills= {
+export type Skills= {
     skill: string;
     yearsOfExperience: string;
     commentSkills: string;
 }
-export type MyInfoQualifications_Language= {
+export type Language= {
     language: string;
     fluency: string;
     competency: string;
     commentLanguage: string;
 }
-export type MyInfoQualifications_License= {
+export type License= {
     licenseType: string;
     licenseNumber: string;
     issuedDate: string;
     expiryDate: string;
 }
 
-export type MyInfoQualifications_AttachFile = {
-    attachmentQualifications: string;
-    commentQualifications: string;
-}

@@ -1,31 +1,28 @@
 import { Page, Locator, expect} from "@playwright/test";
 import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/MyInfo_PersonalDetails";
+import { BasePage } from "../BasePage";
 
-export class MyInfoPersonalDetailsTab{
-readonly page: Page
-readonly firstName: Locator
-readonly middleName: Locator
-readonly lastName: Locator
-readonly employeeId: Locator
-readonly otherId: Locator
-readonly driverLicense: Locator
-readonly licenseExpiry: Locator
-readonly nationalityFilter: Locator
-readonly maritalFilter: Locator
-readonly selectDropdown: Locator
-readonly dateBirth: Locator
-readonly personalDetailsSaveButton: Locator
-readonly bloodType: Locator
-readonly testField: Locator
-readonly customFieldsSaveButton: Locator
-readonly addButton: Locator
-readonly attachment: Locator
-readonly comment: Locator
-readonly AttachmentSaveButton: Locator
-readonly tabRole: Locator
+
+export class MyInfoPersonalDetailsTab extends BasePage{
+private readonly firstName: Locator
+private readonly middleName: Locator
+private readonly lastName: Locator
+private readonly employeeId: Locator
+private readonly otherId: Locator
+private readonly driverLicense: Locator
+private readonly licenseExpiry: Locator
+private readonly nationalityFilter: Locator
+private readonly maritalFilter: Locator
+private readonly selectDropdown: Locator
+private readonly dateBirth: Locator
+private readonly personalDetailsSaveButton: Locator
+private readonly bloodType: Locator
+private readonly testField: Locator
+private readonly customFieldsSaveButton: Locator
+
 
     constructor(page: Page){
-this.page = page;
+super(page);
 this.firstName = page.getByPlaceholder("First Name");
 this.middleName = page.getByPlaceholder("Middle Name");
 this.lastName= page.getByPlaceholder("Last Name");
@@ -41,36 +38,30 @@ this.selectDropdown =page.locator('.oxd-input-group').getByRole('listbox');
 this.bloodType = page .locator('.oxd-input-group').filter({ hasText: 'Blood Type' }).locator('.oxd-select-text-input');
 this.testField = page .locator('.oxd-input-group').filter({ hasText: 'Test_Field' }).locator('input');
 this.customFieldsSaveButton = page.locator('form').filter({ hasText: 'Blood' }).getByRole('button',{name: 'Save'});
-this.addButton = page.getByRole('button', {name: "Add"});
-this.attachment = page.locator('input[type="file"]');
-this.comment = page.getByPlaceholder("Type comment here");
-this.AttachmentSaveButton = page.locator('form').filter({ hasText: 'Select File' }).getByRole('button',{name: 'Save'});
-this.tabRole =page.locator('.orangehrm-tabs');
 
 }
-
 
 async updatePersonalDetails(data:MyInfoPersonalDetails){
-    await this.firstName.click();
-    await this.firstName.fill(data.firstName);
-    await this.middleName.fill(data.middleName);
-    await this.lastName.fill(data.lastName);
-    await this.employeeId.fill(data.employeeId);
-    await this.otherId.fill(data.otherId);
-    await this.driverLicense.fill(data.driverLicenseNumber);
-    await this.licenseExpiry.fill(data.licenseExpiryDate);
-    await this.nationalityFilter.pressSequentially(data.nationality);
+    await this.click(this.firstName);
+    await this.fill(this.firstName, data.firstName);
+    await this.fill(this.middleName, data.middleName);
+    await this.fill(this.lastName, data.lastName);
+    await this.fill(this.employeeId, data.employeeId);
+    await this.fill(this.otherId, data.otherId);
+    await this.fill(this.driverLicense, data.driverLicenseNumber);
+    await this.fill(this.licenseExpiry, data.licenseExpiryDate);
+    await this.pressSequentially(this.nationalityFilter, data.nationality);
     await this.selectDropdown.getByRole('option', {name: data.nationality,exact: true }).click();
-    await this.maritalFilter.pressSequentially(data.maritalStatus);
+    await this.pressSequentially(this.maritalFilter, data.maritalStatus);
     await this.selectDropdown.getByRole('option', {name: data.maritalStatus,exact: true }).click();
-    await this.dateBirth.fill(data.dateBirth);
-    await this.personalDetailsSaveButton.click();
+    await this.fill(this.dateBirth, data.dateBirth);
+    await this.click(this.personalDetailsSaveButton);
 }
 async updateCustomFields(data:MyInfoPersonalDetails_CustomFields){
-    await this.bloodType.pressSequentially(data.bloodType)
+    await this.pressSequentially(this.bloodType, data.bloodType)
     await this.selectDropdown.getByRole('option', {name: data.bloodType,exact: true }).click();
-    await this.testField.fill(data.testField)
-    await this.customFieldsSaveButton.click();
+    await this.fill(this.testField, data.testField)
+    await this.click(this.customFieldsSaveButton);
 }
 
 

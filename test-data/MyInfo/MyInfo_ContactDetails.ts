@@ -1,5 +1,4 @@
 export const myInfoContactDetails = {
-    contactDetails:'Contact Details',
     street1: 'Block 100, Lot 100',
     street2: 'Purok Subdivision',
     city: 'Cebu',

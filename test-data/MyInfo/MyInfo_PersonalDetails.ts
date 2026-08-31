@@ -1,7 +1,6 @@
 
 
 export const myInfoPersonalDetails  = {
-   personalDetailsTab: 'Personal Details',
    firstName: 'Demo',
    middleName: 'Open',
    lastName: 'Source',

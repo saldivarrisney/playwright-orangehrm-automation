@@ -1,5 +1,4 @@
 export const myInfoEmergencyContacts = {
-    emergencyContacts:'Emergency Contacts',
     name: 'Mary Ann',
     relationship: 'Wife',
     homeTelephone: '1333-3333',

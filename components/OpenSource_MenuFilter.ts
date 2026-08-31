@@ -1,25 +1,14 @@
 import { Page, Locator} from "@playwright/test";
-import { AttachmentFields } from "../types/Menu_Filter/OpenSource_MenuFilter";
 
 export class OpenSource_MenuFilter {
 readonly page: Page
 readonly menuSearch: Locator
-readonly tabRole: Locator
-readonly uploadAttachment: Locator
-readonly comment: Locator
-readonly saveAttachmentButton: Locator
-readonly attachmentFileField: Locator
 
 
 constructor(page: Page){
 this.page = page;
 this.menuSearch = page.getByPlaceholder("Search");
-this.tabRole =page.locator('.orangehrm-tabs');
-this.uploadAttachment = page.locator('input[type="file"]');
-this.comment = page.getByPlaceholder("Type comment here");
-this.saveAttachmentButton = page.locator('form').filter({ hasText: 'Select File' }).getByRole('button',{name: 'Save'});
-this.attachmentFileField= page.locator('.oxd-input-group').locator('.oxd-file-input')
-    }
+  }
 
 async searchAndSelectMenu(menuName: string){
     await this.menuSearch.fill(menuName)
@@ -27,15 +16,5 @@ async searchAndSelectMenu(menuName: string){
         const result = this.page.locator('.oxd-main-menu-item', {hasText: menuName});
             await result.click();
 }
-async myInfoTabs(myInfoTabName: string){
-    await this.tabRole.getByRole('tab', {name:myInfoTabName}).click();
 
-}
-async addAttachment(data:AttachmentFields){
-    const addAttachmentButton = this.page.locator('.orangehrm-action-header').filter({hasText: 'Attachment'}).getByRole('button', {name: "Add"});
-            await addAttachmentButton.click();
-            await this.uploadAttachment.setInputFiles(data.attachmentFile);
-    await this.comment.fill(data.attachmentComment);
-    await this.saveAttachmentButton.click(); 
-}
 } 

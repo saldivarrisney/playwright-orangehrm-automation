@@ -1,57 +1,56 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoQualifications_Education, MyInfoQualifications_Experience, MyInfoQualifications_Language, MyInfoQualifications_License, MyInfoQualifications_Skills,MyInfoQualifications_AttachFile} from "../../types/MyInfo/MyInfo_Qualifications";
+import { Education, Experience, Language, License, Skills} from "../../types/MyInfo/MyInfo_Qualifications";
+import { BasePage } from "../BasePage";
 
-
-export class MyInfoQualificationsTab {
-readonly page: Page
+export class MyInfoQualificationsTab extends BasePage{
 //experience
-readonly addWorkExperienceButton: Locator
-readonly company: Locator
-readonly jobTitle: Locator
-readonly fromDate: Locator
-readonly toDate: Locator
-readonly experienceComment: Locator
-readonly saveExperienceButton: Locator
+private readonly addExperienceButton: Locator
+private readonly company: Locator
+private readonly jobTitle: Locator
+private readonly fromDate: Locator
+private readonly toDate: Locator
+private readonly experienceComment: Locator
+private readonly saveExperienceButton: Locator
 //education
-readonly addWorkEducationButton: Locator
-readonly selectDropdown: Locator
-readonly level: Locator
-readonly institute: Locator
-readonly majorSpecialization: Locator
-readonly year: Locator
-readonly gpaScore: Locator
-readonly startDate: Locator
-readonly endDate: Locator
-readonly saveEducationButton: Locator
+private readonly addEducationButton: Locator
+private readonly selectDropdown: Locator
+private readonly level: Locator
+private readonly institute: Locator
+private readonly majorSpecialization: Locator
+private readonly year: Locator
+private readonly gpaScore: Locator
+private readonly startDate: Locator
+private readonly endDate: Locator
+private readonly saveEducationButton: Locator
 //skills
-readonly addWorkSkillButton: Locator
-readonly skill: Locator
-readonly yearsOfExperience: Locator
-readonly skillsComment: Locator
-readonly skillsSaveButton: Locator
+private readonly addSkillButton: Locator
+private readonly skill: Locator
+private readonly yearsOfExperience: Locator
+private readonly skillsComment: Locator
+private readonly skillsSaveButton: Locator
 //language
-readonly addWorkLanguageButton: Locator
-readonly language: Locator
-readonly fluency: Locator
-readonly competency: Locator
-readonly languageComment: Locator
-readonly languageSaveButton: Locator
+private readonly addLanguageButton: Locator
+private readonly language: Locator
+private readonly fluency: Locator
+private readonly competency: Locator
+private readonly languageComment: Locator
+private readonly languageSaveButton: Locator
 //license
-readonly addWorkLicenseButton: Locator
-readonly licenseType: Locator
-readonly licenseNumber: Locator
-readonly issuedDate: Locator
-readonly expiryDate: Locator
-readonly licenseSaveButton: Locator
+private readonly addLicenseButton: Locator
+private readonly licenseType: Locator
+private readonly licenseNumber: Locator
+private readonly issuedDate: Locator
+private readonly expiryDate: Locator
+private readonly licenseSaveButton: Locator
 
 
 
 
     constructor(page: Page){
 
-this.page = page;
+super(page);
 //experience
-this.addWorkExperienceButton = page.locator('.orangehrm-action-header').filter({hasText: 'Work Experience'}).getByRole('button', {name: "Add"});
+this.addExperienceButton = page.locator('.orangehrm-action-header').filter({hasText: 'Work Experience'}).getByRole('button', {name: "Add"});
 this.company = page .locator('.oxd-input-group').filter({ hasText: 'Company' }).locator('input');
 this.jobTitle =page.locator('.oxd-input-group').filter({ hasText: 'Job Title' }).locator('input');
 this.fromDate = page .locator('.oxd-input-group').filter({ hasText: 'From' }).locator('input');
@@ -59,7 +58,7 @@ this.toDate = page .locator('.oxd-input-group').filter({ hasText: 'To' }).locato
 this.experienceComment =page .locator('.oxd-input-group').filter({ hasText: 'Comment' }).locator('textarea');
 this.saveExperienceButton = page.locator('form').filter({hasText: 'Company'}).getByRole('button', {name: "Save"});
 //education
-this.addWorkEducationButton = page.locator('.orangehrm-action-header').filter({hasText: 'Education'}).getByRole('button', {name: "Add"});
+this.addEducationButton = page.locator('.orangehrm-action-header').filter({hasText: 'Education'}).getByRole('button', {name: "Add"});
 this.selectDropdown =page.locator('.oxd-input-group').getByRole('listbox');
 this.level = page .locator('.oxd-input-group').filter({ hasText: 'Level' }).locator('.oxd-select-text-input');
 this.institute = page .locator('.oxd-input-group').filter({ hasText: 'Institute' }).locator('input');
@@ -70,92 +69,82 @@ this.startDate = page .locator('.oxd-input-group').filter({ hasText: 'Start Date
 this.endDate = page .locator('.oxd-input-group').filter({ hasText: 'End Date' }).locator('input');
 this.saveEducationButton = page.locator('form').filter({ hasText: 'Level' }).getByRole('button',{name: 'Save'});
 //skills
-this.addWorkSkillButton = page.locator('.orangehrm-action-header').filter({hasText: 'Skills'}).getByRole('button', {name: "Add"});
+this.addSkillButton = page.locator('.orangehrm-action-header').filter({hasText: 'Skills'}).getByRole('button', {name: "Add"});
 this.skill = page .locator('.oxd-input-group').filter({ hasText: 'Skill' }).locator('.oxd-select-text-input');
 this.yearsOfExperience = page .locator('.oxd-input-group').filter({ hasText: 'Years of Experience' }).locator('input');
 this.skillsComment =page .locator('.oxd-input-group').filter({ hasText: 'Comments' }).locator('textarea');
 this.skillsSaveButton = page.locator('form').filter({ hasText: 'Skill' }).getByRole('button',{name: 'Save'});
 //language
-this.addWorkLanguageButton = page.locator('.orangehrm-action-header').filter({hasText: 'Language'}).getByRole('button', {name: "Add"});
+this.addLanguageButton = page.locator('.orangehrm-action-header').filter({hasText: 'Language'}).getByRole('button', {name: "Add"});
 this.language = page .locator('.oxd-input-group').filter({ hasText: 'Language' }).locator('.oxd-select-text-input');
 this.fluency = page .locator('.oxd-input-group').filter({ hasText: 'Fluency' }).locator('.oxd-select-text-input');
 this.competency = page .locator('.oxd-input-group').filter({ hasText: 'Competency' }).locator('.oxd-select-text-input');
 this.languageComment = page.locator('form').filter({ hasText: 'Language' }).locator('textarea');
 this.languageSaveButton = page.locator('form').filter({ hasText: 'Language' }).getByRole('button',{name: 'Save'});
 //license
-this.addWorkLicenseButton = page.locator('.orangehrm-action-header').filter({hasText: 'License'}).getByRole('button', {name: "Add"});
+this.addLicenseButton = page.locator('.orangehrm-action-header').filter({hasText: 'License'}).getByRole('button', {name: "Add"});
 this.licenseType = page .locator('.oxd-input-group').filter({ hasText: 'License Type' }).locator('.oxd-select-text-input');
 this.licenseNumber = page .locator('.oxd-input-group').filter({ hasText: 'License Number' }).locator('input');
 this.issuedDate = page .locator('.oxd-input-group').filter({ hasText: 'Issued Date' }).locator('input');
 this.expiryDate =page .locator('.oxd-input-group').filter({ hasText: 'Expiry Date' }).locator('input');
 this.licenseSaveButton = page.locator('form').filter({ hasText: 'License Type' }).getByRole('button',{name: 'Save'});
-//attachment
-this.addAttachmentButton = page.locator('.orangehrm-action-header').filter({hasText: 'Attachment'}).getByRole('button', {name: "Add"});
-this.attachment = page.locator('input[type="file"]');
-this.attachmentComment = page.getByPlaceholder("Type comment here");
-this.attachmentSaveButton = page.locator('form').filter({ hasText: 'Select File' }).getByRole('button',{name: 'Save'});
+    }
+
+async addExperience(data: Experience){
+    await this.click(this.addExperienceButton);
+    await this.fill(this.company, data.company);
+    await this.fill(this.jobTitle, data.jobTitle);
+    await this.fill(this.fromDate, data.from);
+    await this.fill(this.toDate, data.to);
+    await this.fill(this.experienceComment, data.comment)
+    await this.click(this.saveExperienceButton);
 }
 
-async addQualifications_Experience(data: MyInfoQualifications_Experience){
-    await this.addWorkExperienceButton.click();
-    await this.company.fill(data.company);
-    await this.jobTitle.fill(data.jobTitle);
-    await this.fromDate.fill(data.from);
-    await this.toDate.fill(data.to);
-    await this.experienceComment.fill(data.comment)
-    await this.saveExperienceButton.click();
-}
-
-async addQualifications_Education(data: MyInfoQualifications_Education){
-    await this.addWorkEducationButton.click();
-    await this.level.pressSequentially(data.level);
+async addEducation(data: Education){
+    await this.click(this.addEducationButton);
+    await this.pressSequentially(this.level, data.level);
     await this.selectDropdown.getByRole('option', {name: data.level, exact: true}).click();
-    await this.institute.fill(data.institute);
-    await this.majorSpecialization.fill(data.majorSpecialization);
-    await this.year.fill(data.year);
-    await this.gpaScore.fill(data.gpaScore);
-    await this.startDate.fill(data.startDate);
-    await this.endDate.fill(data.endDate);
-    await this.saveEducationButton.click();
+    await this.fill(this.institute, data.institute);
+    await this.fill(this.majorSpecialization,data.majorSpecialization);
+    await this.fill(this.year, data.year);
+    await this.fill(this.gpaScore, data.gpaScore);
+    await this.fill(this.startDate, data.startDate);
+    await this.fill(this.endDate, data.endDate);
+    await this.click(this.saveEducationButton);
 }
 
-async addQualifications_Skill(data: MyInfoQualifications_Skills){
-    await this.addWorkSkillButton.click();
-    await this.skill.click();
-    await this.skill.pressSequentially(data.skill);
+async addSkill(data: Skills){
+    await this.click(this.addSkillButton);
+    await this.click(this.skill);
+    await this.pressSequentially(this.skill, data.skill);
     await this.selectDropdown.getByRole('option', {name: data.skill, exact: true}).click();
-    await this.yearsOfExperience.fill(data.yearsOfExperience);
-    await this.skillsComment.fill(data.commentSkills);
-    await this.skillsSaveButton.click();
+    await this.fill(this.yearsOfExperience, data.yearsOfExperience);
+    await this.fill(this.skillsComment, data.commentSkills);
+    await this.click(this.skillsSaveButton);
 }
 
-async addQualifications_Language(data: MyInfoQualifications_Language){
-    await this.addWorkLanguageButton.click();
-    await this.language.click();
-    await this.language.pressSequentially(data.language);
+async addLanguage(data: Language){
+    await this.click(this.addLanguageButton);
+    await this.click(this.language);
+    await this.pressSequentially(this.language, data.language);
     await this.selectDropdown.getByRole('option', {name:data.language, exact:true}).click();
-    await this.fluency.pressSequentially(data.fluency);
+    await this.pressSequentially(this.fluency, data.fluency);
     await this.selectDropdown.getByRole('option',{name: data.fluency, exact: true}).click();
-    await this.competency.pressSequentially(data.competency);
+    await this.pressSequentially(this.competency, data.competency);
     await this.selectDropdown.getByRole('option', {name: data.competency, exact:true}).click();
-    await this.languageComment.fill(data.commentLanguage);
-    await this.languageSaveButton.click();
+    await this.fill(this.languageComment, data.commentLanguage);
+    await this.click(this.languageSaveButton);
 }
 
-async addQualifications_License(data: MyInfoQualifications_License){
-    await this.addWorkLicenseButton.click();
-    await this.licenseType.pressSequentially(data.licenseType);
+async addLicense(data: License){
+    await this.click(this.addLicenseButton);
+    await this.pressSequentially(this.licenseType, data.licenseType);
     await this.selectDropdown.getByRole('option', {name: data.licenseType, exact:true}).click();
-    await this.licenseNumber.fill(data.licenseNumber);
-    await this.issuedDate.fill(data.issuedDate);
-    await this.expiryDate.fill(data.expiryDate);
-    await this.licenseSaveButton.click();
+    await this.fill(this.licenseNumber, data.licenseNumber);
+    await this.fill(this.issuedDate, data.issuedDate);
+    await this.fill(this.expiryDate, data.expiryDate);
+    await this.click(this.licenseSaveButton);
 }
 
-//  async addAttachment(data:MyInfoQualifications_AttachFile){
-//     await this.addAttachmentButton.click();
-//     await this.attachment.setInputFiles(data.attachmentQualifications);
-//     await this.attachmentComment.fill(data.commentQualifications);
-//     await this.attachmentSaveButton.click();
-// }
+
 }

@@ -1,40 +1,29 @@
-import { ENV_SouceDemo } from '../../config/env';
-import { test, expect } from '@playwright/test';
-import { LoginFeature } from "../../pages/login/OpenSource_Login";
+import {expect } from '@playwright/test';
+import { test } from '../../fixtures/test.fixture';
 import { LoginDataScenarios } from "../../test-data/Login/OpenSource_Login";
-import { OpenSource_ToastMessage } from "../../components/OpenSource_ToastMessage";
 import { addAdminUser, addNonAdminUser, navigateCreationOfUSer } from "../../test-data/admin/Admin_UserManagement";
-import { AdminFeatures } from "../../pages/admin/Admin_UserManagementAddUser";
-import { MyInfoPersonalDetailsTab } from '../../pages/myInfo/MyInfo_PersonalDetails';
-import { OpenSource_MenuFilter } from '../../components/OpenSource_MenuFilter';
-import { menuFilter } from '../../test-data/components/OpenSource_Components';
 import { myInfoPersonalDetails } from '../../test-data/MyInfo/MyInfo_PersonalDetails';
+import { openSource_HeadersAndTitle_Data, menuFilter} from '../../test-data/components/OpenSource_Components';
+
+
 
 test.describe('Delete Fucntionalities', () =>{
-    let loginFeature: LoginFeature;
-    let adminFeatures: AdminFeatures;
-    let openSource_ToastMessage: OpenSource_ToastMessage;
-    let myInfoPersonalDetailsTab: MyInfoPersonalDetailsTab;
-    let openSource_MenuFilter: OpenSource_MenuFilter;
-
-test.beforeEach(async ({page}) => {
-    loginFeature = new LoginFeature(page);
-    adminFeatures = new AdminFeatures(page);
-    openSource_ToastMessage = new OpenSource_ToastMessage(page);
-    myInfoPersonalDetailsTab = new MyInfoPersonalDetailsTab(page);
-    openSource_MenuFilter = new OpenSource_MenuFilter(page);
-
-
-
-await loginFeature.navigatePage(ENV_SouceDemo.source_url)
-})
-test('Admin- Delete All User Records', async ({page}) => {
-        await loginFeature.logIn(LoginDataScenarios.validCredentials.username,LoginDataScenarios.validCredentials.password)
+ 
+test.beforeEach(async ({loginFeature, openSource_HeadersAndTitle}) => {
+    await loginFeature.openPage();
+      await loginFeature.logIn(LoginDataScenarios.validCredentials.username,LoginDataScenarios.validCredentials.password);
+        await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.loginHeader)).toBeVisible();
+     
+      });
+test('Admin- Delete All User Records', async ({openSource_MenuFilter,openSource_HeadersAndTitle,
+    myInfoPersonalDetailsTab, openSource_ToastMessage, adminFeatures}) => {
             await openSource_MenuFilter.searchAndSelectMenu(menuFilter.myInfo); 
+                await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.headerPersonalDetails)).toBeVisible();
                 await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetails)                  
                     await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-            await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin);                    
+            await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin);   
+                await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.headerAdmin)).toBeVisible();                 
                 await adminFeatures.navigateCreationOfUSer(navigateCreationOfUSer); 
                     await adminFeatures.createUser(addNonAdminUser);
                         await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
@@ -43,13 +32,15 @@ test('Admin- Delete All User Records', async ({page}) => {
                         await expect(adminFeatures.allUserRecordCheckbox).toHaveCount(0);    
 })
 
-test('Create Non-Admin user and then Delete it', async ({page}) => {
-        await loginFeature.logIn(LoginDataScenarios.validCredentials.username,LoginDataScenarios.validCredentials.password)
+test('Create Non-Admin user and then Delete it', async ({openSource_MenuFilter,openSource_HeadersAndTitle,
+    myInfoPersonalDetailsTab, openSource_ToastMessage, adminFeatures}) => {
             await openSource_MenuFilter.searchAndSelectMenu(menuFilter.myInfo); 
+                await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.headerPersonalDetails)).toBeVisible();
                 await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetails)                  
                     await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
                         await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-            await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin);                    
+            await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin);      
+                await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.headerAdmin)).toBeVisible();                               
                   await adminFeatures.navigateCreationOfUSer(navigateCreationOfUSer); 
                 await adminFeatures.createUser(addAdminUser)        
                         await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
@@ -59,7 +50,7 @@ test('Create Non-Admin user and then Delete it', async ({page}) => {
                                     await adminFeatures.confirmDeleteUser();          
                                         await expect(openSource_ToastMessage.deleteMessage).toBeVisible();                                       
                                             await expect(openSource_ToastMessage.deleteMessage).toBeHidden();
-                        await expect(adminFeatures.verifyDeletedUser(addAdminUser.username)).toHaveCount(0);
+                                                await expect(adminFeatures.verifyDeletedUser(addAdminUser.username)).toHaveCount(0);
 
                     })
                 })

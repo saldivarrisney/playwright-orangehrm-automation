@@ -39,12 +39,12 @@ export const myInfoQualifications_Attachment: AttachmentFields= {
 attachmentFile: 'test-data/files/demo.jpg',
 attachmentComment: 'Demo Testing only-Qualifications',
 }
-export const myInfoMemberships_Attahment: AttachmentFields= {
+export const myInfoMemberships_Attahment: AttachmentFields = {
 attachmentFile: 'test-data/files/demo.jpg',
 attachmentComment: 'Demo Testing only-Memberships',
 }
 
-export const openSource_HeadersAndTitle: TitleHeader= {
+export const openSource_HeadersAndTitle_Data: TitleHeader= {
    loginHeader: 'Dashboard',
    headerPersonalDetails: 'Personal Details',
    headerContactDetails: 'Contact Details',
@@ -53,6 +53,6 @@ export const openSource_HeadersAndTitle: TitleHeader= {
    headerImmigration: 'Assigned Immigration Records',
    headerQualification: 'Qualifications',
    headerMembership: 'Assigned Memberships',
-   headerAdmin: 'Admin User Management',
+   headerAdmin: 'User Management',
 }
     

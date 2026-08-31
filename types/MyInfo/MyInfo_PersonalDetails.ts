@@ -1,6 +1,5 @@
 
 export type MyInfoPersonalDetails = {
-    personalDetailsTab:string;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -16,8 +15,4 @@ export type MyInfoPersonalDetails_CustomFields = {
    bloodType: string;
    testField: string;
 }
-export type MyInfoPersonalAndContact_AttachFile = {
-    attachmentPersonalDetails: string;
-    commentPersonalDetails: string;
 
-}

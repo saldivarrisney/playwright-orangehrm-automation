@@ -1,5 +1,4 @@
 export type MyInfoContactDetails = {
-    contactDetails:string;
     street1: string;
     street2: string;
     city: string;

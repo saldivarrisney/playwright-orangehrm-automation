@@ -1,33 +1,31 @@
 import { Page, Locator, expect } from "@playwright/test";
 import {NavigateCreationOfUSer , UpdateUserData, UserData} from "../../types/Admin/Admin_UserManagement";
-// import { OpenSource_ToastMessage } from "../../components/MyInfo_ToastMessage";
+import { BasePage } from "../BasePage";
 
-export class AdminFeatures{
-    // private readonly toastMessage: OpenSource_ToastMessage;
-    readonly page: Page
-    readonly searchField: Locator
-    readonly headerUserManagementButton: Locator
-    readonly addUserButton: Locator
-    readonly userRole: Locator
-    readonly employeeName: Locator
-    readonly status: Locator
-    readonly username: Locator
-    readonly password: Locator
-    readonly confirmPassword: Locator
-    readonly saveUserButton: Locator
-    readonly selectDropdown: Locator
-    readonly editButton: Locator
-    readonly selectHeaderCheckbox: Locator
-    readonly deleteButton: Locator
-    readonly deleteWarningMessage: Locator
-    readonly YesDeleteConfirmButton: Locator
-    readonly nextPageButton: Locator
+export class AdminFeatures extends BasePage{
+    private readonly searchField: Locator
+    private readonly headerUserManagementButton: Locator
+    private readonly addUserButton: Locator
+    private readonly userRole: Locator
+    private readonly employeeName: Locator
+    private readonly status: Locator
+    private readonly username: Locator
+    private readonly password: Locator
+    private readonly confirmPassword: Locator
+    private readonly saveUserButton: Locator
+    private readonly selectDropdown: Locator
+    private readonly editButton: Locator
+    private readonly selectHeaderCheckbox: Locator
+    private readonly deleteButton: Locator
+    private readonly deleteWarningMessage: Locator
+    private readonly YesDeleteConfirmButton: Locator
+    private readonly nextPageButton: Locator
     readonly allUserRecordCheckbox: Locator
-    readonly changePasswordCheckbox: Locator
+    private readonly changePasswordCheckbox: Locator
 
 
     constructor(page: Page){
-this.page = page;
+super(page);
 this.searchField = page.getByPlaceholder("Search");
 this.headerUserManagementButton = page.locator('.oxd-topbar-body-nav-tab').filter({hasText: 'User Management'});
 this.addUserButton=page.getByRole('button', {name: 'Add'});
@@ -51,7 +49,7 @@ this.changePasswordCheckbox =page.locator('form').filter({hasText: 'Yes'}).locat
 }
 
 async navigateCreationOfUSer(data:NavigateCreationOfUSer){
-    await this.headerUserManagementButton.click();
+    await this.click(this.headerUserManagementButton);
         const clickUsersHeader = this.page.getByRole('menuitem', {name: data.clickUsersHeader});
             await clickUsersHeader.click();
 }
@@ -62,51 +60,54 @@ const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username
 }
 
 async enterTheNewDataUser(data: UpdateUserData){
-    await this.username.click();
-    await this.username.fill(data.updateUsername);
+    await this.click(this.username);
+    await this.fill(this.username, data.updateUsername);
     await this.changePasswordCheckbox.check();
-    await this.password.fill(data.updatePassword);
-    await this.confirmPassword.fill(data.updateConfirmPassword)
-    await this.saveUserButton.click();
+    await this.fill(this.password, data.updatePassword);
+    await this.fill(this.confirmPassword, data.updateConfirmPassword)
+    await this.click(this.saveUserButton);
 }
 
  async createUser(data:UserData){
-    await this.addUserButton.click();
-    await this.userRole.pressSequentially(data.userRole);
+    await this.click(this.addUserButton);
+    await this.pressSequentially(this.userRole, data.userRole);
     await this.selectDropdown.getByRole('option', {name: data.userRole}).click();
-    await this.employeeName.fill(data.employeeName);
+    await this.fill(this.employeeName, data.employeeName);
     await this.selectDropdown.getByRole('option', {name: data.employeeName}).click();
-    await this.status.pressSequentially(data.status);
+    await this.pressSequentially(this.status, data.status);
     await this.selectDropdown.getByRole('option', {name:data.status }).click();
-    await this.username.fill(data.username);
-    await this.password.fill(data.password);
-    await this.confirmPassword.fill(data.confirmPassword);
-    await this.saveUserButton.click();
+    await this.fill(this.username, data.username);
+    await this.fill(this.password, data.password);
+    await this.fill(this.confirmPassword, data.confirmPassword);
+    await this.click(this.saveUserButton);
 }
 async clickDeleteUser(data:UserData)   {
 const userRowToDeleteAndClickButton = this.page.getByRole('row').filter({ hasText: data.username }).locator('.oxd-table-cell-actions').locator('.bi-trash');
     await userRowToDeleteAndClickButton.click();
 }
 async confirmDeleteUser() {
-    await this.YesDeleteConfirmButton.click();
+    await this.click(this.YesDeleteConfirmButton);
 }
 
 verifyDeletedUser(username: string): Locator {
     return this.page.getByRole('row').filter({ hasText: username });
 }
-
-
+verifyTheUpdatedRecord(username: string): Locator {
+    return this.page.getByRole('row').filter({hasText: username});
+    
+// this.page.getByRole('row').filter({ hasText: data.username })
+}
 async deleteAllUSersRecord()   {
 while(true){
-    await this.selectHeaderCheckbox.click();
+    await this.click(this.selectHeaderCheckbox);
             // May records ba sa current page? if wala, stop
      if (await this.allUserRecordCheckbox.count() === 0) {
             break;
         }
             // May records kaya ededelete
-    await this.deleteButton.click();
+    await this.click(this.deleteButton);
             // Confirmation
-    await this.YesDeleteConfirmButton.click();
+    await this.click(this.YesDeleteConfirmButton);
 
             // Wait until records disappear
         await expect(this.allUserRecordCheckbox).toHaveCount(0);

@@ -1,5 +1,4 @@
 export type MyInfoMembership= {
-    memberships: string;
     membership: string;
     subscriptionPaidBy: string;
     subscriptionAmount: string;
@@ -9,7 +8,3 @@ export type MyInfoMembership= {
 
 }
 
-export type MyInfoMembership_AttachFile = {
-    attachmentMembership: string;
-    commentMembership: string;
-}

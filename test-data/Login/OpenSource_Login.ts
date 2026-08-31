@@ -1,13 +1,17 @@
-import { ENV_SouceDemo } from "../../config/env";
+import { ENV_OpenSource } from "../../config/env"
+
 
 export const LoginDataScenarios = {
-    invalidUsername: {
-            username: 'wrong_user',
-            password: ENV_SouceDemo.source_password
+        validCredentials: {
+            username: ENV_OpenSource.openSource_username,
+            password: ENV_OpenSource.openSource_password
         },
-    
+            invalidUsername: {
+            username: 'wrong_user',
+            password: ENV_OpenSource.openSource_password
+        },
         invalidPassword: {
-            username: ENV_SouceDemo.source_username,
+            username: ENV_OpenSource.openSource_username,
             password: 'wrong_password'
         },
     
@@ -16,23 +20,18 @@ export const LoginDataScenarios = {
             password: 'wrong_password'
         },
         noPassword: {
-          username: ENV_SouceDemo.source_username,
+          username: ENV_OpenSource.openSource_username,
             password: ''
         },
         noUsername: {
             username: '',
-            password: ENV_SouceDemo.source_password
+            password: ENV_OpenSource.openSource_password
         },
         noCredentials: {
             username: '',
             password: ''
         },
 
-        validCredentials: {
-            username: ENV_SouceDemo.source_username,
-            password: ENV_SouceDemo.source_password
-        },
-           loginHeader: 'Dashboard',
 
-    };
+    }
 

@@ -1,28 +1,24 @@
-import { Page, Locator, expect} from "@playwright/test";
+import { Page, Locator} from "@playwright/test";
 import { MyInfoImmigration } from "../../types/MyInfo/MyInfo_Immigration";
+import { BasePage } from "../BasePage";
 
+export class MyInfoImmigrationsTab extends BasePage{
+private readonly document: Locator
+private readonly addImmigrationButton: Locator
+private readonly number: Locator
+private readonly issuedDate: Locator
+private readonly expiryDate: Locator
+private readonly eligibleStatus: Locator
+private readonly selectDropdown: Locator
+private readonly issuedBy: Locator
+private readonly eligibleReviewDate: Locator
+private readonly comments: Locator
+private readonly saveImmigrationButton: Locator
 
-export class MyInfoImmigrationsTab {
-readonly page: Page
-readonly document: Locator
-readonly addImmigrationButton: Locator
-readonly number: Locator
-readonly issuedDate: Locator
-readonly expiryDate: Locator
-readonly eligibleStatus: Locator
-readonly selectDropdown: Locator
-readonly issuedBy: Locator
-readonly eligibleReviewDate: Locator
-readonly comments: Locator
-readonly saveImmigrationButton: Locator
-readonly attachmentAddButton: Locator
-readonly attachment: Locator
-readonly attachmentComment: Locator
-readonly attachmentSaveButton: Locator
 
     constructor(page: Page){
 
-this.page = page;
+super(page);
 this.addImmigrationButton = page.locator('.orangehrm-action-header').filter({hasText: 'Assigned Immigration Records'}).getByRole('button', {name: "Add"});
 this.document =page.locator('.oxd-input-group');
 this.number = page .locator('.oxd-input-group').filter({ hasText: 'Number' }).locator('input');
@@ -34,26 +30,22 @@ this.issuedBy = page .locator('.oxd-input-group').filter({ hasText: 'Issued By' 
 this.eligibleReviewDate = page .locator('.oxd-input-group').filter({ hasText: 'Eligible Review Date' }).locator('input');
 this.comments = page .locator('.oxd-input-group').filter({ hasText: 'Comments' }).locator('textarea');
 this.saveImmigrationButton = page.locator('form').filter({ hasText: 'Document' }).getByRole('button',{name: 'Save'});
-this.attachmentAddButton = page.locator('.orangehrm-action-header').filter({hasText: 'Attachments'}).getByRole('button', {name: "Add"});
-this.attachment = page.locator('input[type="file"]');
-this.attachmentComment = page.getByPlaceholder("Type comment here");
-this.attachmentSaveButton = page.locator('form').filter({ hasText: 'Select File' }).getByRole('button',{name: 'Save'});
 
 }
 async addImmigration(data: MyInfoImmigration){
-    await this.addImmigrationButton.click();
+    await this.click(this.addImmigrationButton);
     const documentId = this.document.filter({hasText: new RegExp(`^${data.document}$`)}).locator('.oxd-radio-input');
     await documentId.setChecked(true);
-    await this.number.click();
-    await this.number.fill(data.number);
-    await this.issuedDate.fill(data.issuedDate);
-    await this.expiryDate.fill(data.expiryDate);
-    await this.eligibleStatus.fill(data.eligibleStatus);
-    await this.issuedBy.pressSequentially(data.issuedBy);
+    await this.click(this.number);
+    await this.fill(this.number, data.number);
+    await this.fill(this.issuedDate, data.issuedDate);
+    await this.fill(this.expiryDate, data.expiryDate);
+    await this.fill(this.eligibleStatus, data.eligibleStatus);
+    await this.pressSequentially(this.issuedBy, data.issuedBy);
     await this.selectDropdown.getByRole('option', {name: data.issuedBy, exact:true}).click();
-    await this.eligibleReviewDate.fill(data.eligibleReviewDate);
-    await this.comments.fill(data.comments);
-    await this.saveImmigrationButton.click();
+    await this.fill(this.eligibleReviewDate, data.eligibleReviewDate);
+    await this.fill(this.comments, data.comments);
+    await this.click(this.saveImmigrationButton);
     
 }
 

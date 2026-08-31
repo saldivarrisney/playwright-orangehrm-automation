@@ -1,5 +1,4 @@
 export type MyInfoImmigration = {
-    immigration: string;
     document: string;
     number: string;
     issuedDate: string;
@@ -8,10 +7,6 @@ export type MyInfoImmigration = {
     issuedBy: string;
     eligibleReviewDate: string;
     comments:string;
-}
-export type MyInfoImmigrations_AttachFile = {
-    attachmentImmigrations: string;
-    commentImmigrations: string
 }
 
     

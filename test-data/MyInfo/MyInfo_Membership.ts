@@ -1,5 +1,4 @@
 export const myInfoMembership= {
-    memberships: 'Membership',
     membership: 'British Computer Society (BCS)',
     subscriptionPaidBy: 'Individual',
     subscriptionAmount: '100',

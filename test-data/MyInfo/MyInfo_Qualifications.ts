@@ -1,5 +1,4 @@
-export const myInfoQualifications_Experience= {
-    qualification: 'Qualifications',
+export const experience= {
     company: 'PH Company',
     jobTitle: 'QA Engineer',
     from: '2021-02-10',
@@ -7,7 +6,7 @@ export const myInfoQualifications_Experience= {
     comment: 'QA Engineer- Playwright',
 }
 
-export const myInfoQualifications_Education= {
+export const education= {
     level: "Bachelor's Degree",
     institute: 'PH University',
     majorSpecialization: 'Programming',
@@ -16,18 +15,18 @@ export const myInfoQualifications_Education= {
     startDate: '2015-07-10',
     endDate: '2019-03-10',
 }
-export const myInfoQualifications_Skills= {
+export const skills= {
     skill: 'JIRA',
     yearsOfExperience: '7',
     commentSkills: 'Gained the skill from my previous company',
 }
-export const myInfoQualifications_Language= {
+export const language= {
     language: 'English',
     fluency: 'Writing',
     competency: 'Good',
     commentLanguage: 'Daily use especially at work',
 }
-export const myInfoQualifications_License= {
+export const license= {
     licenseType: 'Certified Digital Marketing Professional (CDMP)',
     licenseNumber: '123-4567-890',
     issuedDate: '2026-10-10',
