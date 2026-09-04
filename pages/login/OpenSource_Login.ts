@@ -16,13 +16,11 @@ constructor (page: Page){
 
 }
 
-
 async openPage(){
     await this.navigate('/');
 
 }
 async logIn(username: string, password: string){
-// async logIn(username: string, password: string){
       await this.fill(this.usernameInput, username)
       await this.fill(this.passwordInput, password)
       await this.click(this.loginButton);

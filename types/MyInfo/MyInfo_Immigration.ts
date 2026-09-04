@@ -1,3 +1,4 @@
+
 export type MyInfoImmigration = {
     document: string;
     number: string;

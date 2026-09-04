@@ -1,13 +1,9 @@
-export type FilterAdminModule= {
-    searchField: string;
-}
 
-export type NavigateCreationOfUSer= {
+export type NavigateCreationOfUser= {
     clickUsersHeader: string;
     headerTitle: string;
 }
-
-export type UserData= {
+export type AddUserData= {
     userRole: string;
     employeeName: string;
     status: string;
@@ -15,8 +11,6 @@ export type UserData= {
     password: string;
     confirmPassword: string;
 }
-
-
 export type UpdateUserData = {
     updateUsername: string;
     updatePassword: string;

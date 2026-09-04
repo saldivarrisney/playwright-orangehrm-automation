@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import {NavigateCreationOfUSer , UpdateUserData, UserData} from "../../types/Admin/Admin_UserManagement";
+import {NavigateCreationOfUser , UpdateUserData, AddUserData} from "../../types/Admin/Admin_UserManagement";
 import { BasePage } from "../BasePage";
 
 export class AdminFeatures extends BasePage{
@@ -48,13 +48,13 @@ this.changePasswordCheckbox =page.locator('form').filter({hasText: 'Yes'}).locat
 
 }
 
-async navigateCreationOfUSer(data:NavigateCreationOfUSer){
+async navigateCreationOfUser(data:NavigateCreationOfUser){
     await this.click(this.headerUserManagementButton);
         const clickUsersHeader = this.page.getByRole('menuitem', {name: data.clickUsersHeader});
             await clickUsersHeader.click();
 }
 
-async updateUser(data:UserData){
+async updateUser(data:AddUserData){
 const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username }).locator('.oxd-table-cell-actions').locator('.bi-pencil-fill');
     await userRowToEdit.click();
 }
@@ -68,7 +68,7 @@ async enterTheNewDataUser(data: UpdateUserData){
     await this.click(this.saveUserButton);
 }
 
- async createUser(data:UserData){
+ async createUser(data:AddUserData){
     await this.click(this.addUserButton);
     await this.pressSequentially(this.userRole, data.userRole);
     await this.selectDropdown.getByRole('option', {name: data.userRole}).click();
@@ -81,7 +81,7 @@ async enterTheNewDataUser(data: UpdateUserData){
     await this.fill(this.confirmPassword, data.confirmPassword);
     await this.click(this.saveUserButton);
 }
-async clickDeleteUser(data:UserData)   {
+async clickDeleteUser(data:AddUserData)   {
 const userRowToDeleteAndClickButton = this.page.getByRole('row').filter({ hasText: data.username }).locator('.oxd-table-cell-actions').locator('.bi-trash');
     await userRowToDeleteAndClickButton.click();
 }
@@ -95,24 +95,23 @@ verifyDeletedUser(username: string): Locator {
 verifyTheUpdatedRecord(username: string): Locator {
     return this.page.getByRole('row').filter({hasText: username});
     
-// this.page.getByRole('row').filter({ hasText: data.username })
 }
 async deleteAllUSersRecord()   {
 while(true){
     await this.click(this.selectHeaderCheckbox);
-            // May records ba sa current page? if wala, stop
+            // There is any record on the current page? if so, stop
      if (await this.allUserRecordCheckbox.count() === 0) {
             break;
         }
-            // May records kaya ededelete
+            // Are there any records to delete on the current page?
     await this.click(this.deleteButton);
             // Confirmation
     await this.click(this.YesDeleteConfirmButton);
 
             // Wait until records disappear
-        await expect(this.allUserRecordCheckbox).toHaveCount(0);
+        await this.allUserRecordCheckbox.count() === 0;
         if (
-            // May Next page ba?
+            // Is there a next page?
             await this.nextPageButton.count() > 0 &&
             await this.nextPageButton.isVisible()) {
             await this.nextPageButton.click();

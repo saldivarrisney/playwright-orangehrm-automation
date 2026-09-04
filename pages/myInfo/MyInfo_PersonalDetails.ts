@@ -1,4 +1,4 @@
-import { Page, Locator, expect} from "@playwright/test";
+import { Page, Locator} from "@playwright/test";
 import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/MyInfo_PersonalDetails";
 import { BasePage } from "../BasePage";
 

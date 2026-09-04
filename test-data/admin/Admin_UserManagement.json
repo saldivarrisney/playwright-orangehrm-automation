@@ -1,0 +1,36 @@
+{
+  "navigateCreationOfUser": {
+    "clickUsersHeader": "User",
+    "headerTitle": "Add User"
+  },
+
+  "addAdminUser": {
+    "userRole": "Admin",
+    "employeeName": "Demo Open Source",
+    "status": "Enabled",
+    "username": "DemoPH",
+    "password": "Demo@123",
+    "confirmPassword": "Demo@123"
+  },
+
+  "addNonAdminUser": {
+    "userRole": "ESS",
+    "employeeName": "Demo Open Source",
+    "status": "Enabled",
+    "username": "DemoNonAdminPH",
+    "password": "Demo@123",
+    "confirmPassword": "Demo@123"
+  },
+
+  "updateNonAdminUser": {
+    "updateUsername": "UpdateDemoNonAdminPH",
+    "updatePassword": "Demo@122",
+    "updateConfirmPassword": "Demo@122"
+  },
+
+  "updateAdminUser": {
+    "updateUsername": "UpdateDemoPH",
+    "updatePassword": "Demo@124",
+    "updateConfirmPassword": "Demo@124"
+  }
+}

@@ -1,3 +1,4 @@
+
 export type MenuFilter = {
    myInfo: string;
    admin: string;
@@ -15,7 +16,7 @@ export type AttachmentFields = {
    attachmentFile: string;
    attachmentComment: string;
 }
-export type TitleHeader = {
+export type OpenSource_HeadersAndTitle = {
    headerPersonalDetails: string
    headerContactDetails: string;
    headerEmergencyContacts: string;
