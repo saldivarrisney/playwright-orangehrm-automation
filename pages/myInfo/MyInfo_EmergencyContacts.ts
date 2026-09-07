@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoEmergencyContacts} from "../../types/MyInfo/MyInfo_EmergencyContacts";
+import { MyInfoEmergencyContacts} from "../../types/MyInfo/EmergencyContacts";
 import { BasePage } from "../BasePage";
 
 export class MyInfoEmergencyContactsTab extends BasePage {

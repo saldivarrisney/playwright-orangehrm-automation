@@ -1,0 +1,9 @@
+key,attachmentFile,attachmentComment
+myInfoPersonalDetails_Attachment,test-data/files/demo.jpg,Demo Testing only-Personal Details
+myInfoContactDetails_Attachment,test-data/files/demo.jpg,Demo Testing only-Contact Details
+myInfoDependents_Attachment,test-data/files/demo.jpg,Demo Testing only-Dependents Details
+myInfoEmergencyContacts_Attachment,test-data/files/demo.jpg,Demo Testing only-Emergency Details
+myInfoImmigration_Attachment,test-data/files/demo.jpg,Demo Testing only-Immigration Details
+myInfoMemberships_Attahment,test-data/files/demo.jpg,Demo Testing only-Membership Details
+myInfoQualifications_Attachment,test-data/files/demo.jpg,Demo Testing only-Qualifications Details
+

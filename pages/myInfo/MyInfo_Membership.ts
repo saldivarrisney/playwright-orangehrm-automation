@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoMembership } from "../../types/MyInfo/MyInfo_Membership";
+import { MyInfoMemberships } from "../../types/MyInfo/Memberships";
 import { BasePage } from "../BasePage";
 
 export class MyInfoMembershipTab extends BasePage{
@@ -28,7 +28,7 @@ this.subscriptionRenewalDate = page .locator('.oxd-input-group').filter({ hasTex
 this.saveMembershipButton = page.locator('form').filter({ hasText: 'Membership' }).getByRole('button',{name: 'Save'});
 
 }
-async addMembership(data: MyInfoMembership){
+async addMembership(data: MyInfoMemberships){
     await this.click(this.addMembershipButton);
     await this.pressSequentially(this.membership, data.membership);
     await this.selectDropdown.getByRole('option', {name: data.membership}).click();

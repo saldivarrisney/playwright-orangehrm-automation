@@ -18,8 +18,6 @@ import { MyInfoQualificationsTab } from '../pages/myInfo/MyInfo_Qualifications';
 
 
 
-
-
 type Fixtures = {
     //components
     openSource_Attachment:OpenSource_Attachment;

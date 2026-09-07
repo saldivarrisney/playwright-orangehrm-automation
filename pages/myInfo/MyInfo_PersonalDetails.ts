@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/MyInfo_PersonalDetails";
+import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/PersonalDetails";
 import { BasePage } from "../BasePage";
 
 

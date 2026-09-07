@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoContactDetails } from "../../types/MyInfo/MyInfo_ContactDetails";
+import { MyInfoContactDetails } from "../../types/MyInfo/ContactDetails";
 import { BasePage } from "../BasePage";
 
 export class MyInfoContactDetailsTab extends BasePage{
@@ -42,7 +42,7 @@ async updateContactDetails(data: MyInfoContactDetails){
     await this.fill(this.street2, data.street2);
     await this.fill(this.city, data.city);
     await this.fill(this.stateProvince, data.stateProvince);
-    await this.fill(this.zipPostalCode, data.zipCostal);
+    await this.fill(this.zipPostalCode, data.zipPostal);
     await this.pressSequentially(this.countryFilter, data.country);
     await this.selectDropdown.getByRole('option', {name: data.country, exact:true}).click();
     await this.fill(this.home, data.home);

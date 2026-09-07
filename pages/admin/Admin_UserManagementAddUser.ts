@@ -1,6 +1,9 @@
 import { Page, Locator, expect } from "@playwright/test";
-import {NavigateCreationOfUser , UpdateUserData, AddUserData} from "../../types/Admin/Admin_UserManagement";
+import {UpdateUserData, AddUserData} from "../../types/Admin/Users";
+import { NavigateCreationOfUser } from "../../types/Components/buttons";
 import { BasePage } from "../BasePage";
+
+
 
 export class AdminFeatures extends BasePage{
     private readonly searchField: Locator
@@ -53,9 +56,8 @@ async navigateCreationOfUser(data:NavigateCreationOfUser){
         const clickUsersHeader = this.page.getByRole('menuitem', {name: data.clickUsersHeader});
             await clickUsersHeader.click();
 }
-
 async updateUser(data:AddUserData){
-const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username }).locator('.oxd-table-cell-actions').locator('.bi-pencil-fill');
+const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username}).locator('.oxd-table-cell-actions').locator('.bi-pencil-fill');
     await userRowToEdit.click();
 }
 
@@ -82,7 +84,7 @@ async enterTheNewDataUser(data: UpdateUserData){
     await this.click(this.saveUserButton);
 }
 async clickDeleteUser(data:AddUserData)   {
-const userRowToDeleteAndClickButton = this.page.getByRole('row').filter({ hasText: data.username }).locator('.oxd-table-cell-actions').locator('.bi-trash');
+const userRowToDeleteAndClickButton = this.page.getByRole('row').filter({ hasText: data.username}).locator('.oxd-table-cell-actions').locator('.bi-trash');
     await userRowToDeleteAndClickButton.click();
 }
 async confirmDeleteUser() {
@@ -90,10 +92,10 @@ async confirmDeleteUser() {
 }
 
 verifyDeletedUser(username: string): Locator {
-    return this.page.getByRole('row').filter({ hasText: username });
+    return this.page.getByRole('row').filter({ hasText: username});
 }
 verifyTheUpdatedRecord(username: string): Locator {
-    return this.page.getByRole('row').filter({hasText: username});
+    return this.page.getByRole('row').filter({hasText: username})
     
 }
 async deleteAllUSersRecord()   {

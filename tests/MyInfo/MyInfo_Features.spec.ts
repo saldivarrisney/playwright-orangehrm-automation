@@ -1,16 +1,24 @@
 import { expect } from "@playwright/test";
 import { test } from "../../fixtures/test.fixture";
-import {LoginDataScenarios} from "../../test-data/Login/OpenSource_Login";
-import {myInfoCustomFields,myInfoPersonalDetails,} from "../../test-data/MyInfo/MyInfo_PersonalDetails.json";
-import {myInfoContactDetails,} from "../../test-data/MyInfo/MyInfo_ContactDetails.json";
-import {myInfoEmergencyContacts,} from "../../test-data/MyInfo/MyInfo_EmergencyContacts.json";
-import {myInfoDependents} from "../../test-data/MyInfo/MyInfo_Dependents.json";
-import {myInfoImmigration} from "../../test-data/MyInfo/MyInfo_Immigration.json";
-import { openSource_HeadersAndTitle_Data, menuFilter, myInfoTabName, myInfoContactDetails_Attachment ,myInfoPersonalDetails_Attachment,
-    myInfoEmergencyContacts_Attachment, myInfoMemberships_Attahment, myInfoDependents_Attachment,
-    myInfoImmigration_Attachment,myInfoQualifications_Attachment }from "../../test-data/components/OpenSource_Components.json";
-import {myInfoMembership} from "../../test-data/MyInfo/MyInfo_Membership.json";
-import {education, experience, language, license, skills} from "../../test-data/MyInfo/MyInfo_Qualifications.json";
+import {
+  LoginDataScenarios,
+  headersTitles,
+  menuFilter,
+  myInfoTabName,
+  myInfoPersonalDetail,
+  myInfoPersonalDetails_CustomField,
+  myInfoContactDetail,
+  myInfoEmergencyContact,
+  myInfoDependent,
+  myInfoImmigration,
+  myInfoMembership,
+  attachment,
+  experience,
+  education,
+  skill,
+  language,
+  license,
+} from '../../test-data/index';
 
 
 
@@ -22,71 +30,71 @@ myInfoMembershipTab}) => {
 
       await loginFeature.openPage();
         await loginFeature.logIn(LoginDataScenarios.validCredentials.username,LoginDataScenarios.validCredentials.password,);
-          await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.loginHeader)).toBeVisible();
+          await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.loginHeader)).toBeVisible();
         await openSource_MenuFilter.searchAndSelectMenu(menuFilter.myInfo);
-          await expect(openSource_HeadersAndTitle.titleHeader(openSource_HeadersAndTitle_Data.headerPersonalDetails)).toBeVisible();
+          await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.headerPersonalDetails)).toBeVisible();
             await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.personalDetails);
-              await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetails,);
+              await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetail.myInfoPersonalDetails);
                 await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
                 await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-                await myInfoPersonalDetailsTab.updateCustomFields(myInfoCustomFields);
+                await myInfoPersonalDetailsTab.updateCustomFields(myInfoPersonalDetails_CustomField.myInfoPersonalDetails_CustomFields);
                 await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                 await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                await openSource_Attachment.addAttachment(myInfoPersonalDetails_Attachment)
+                await openSource_Attachment.addAttachment(attachment.myInfoPersonalDetails_Attachment)
                 await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                 await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
                 await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.contactDetails);
-              await myInfoContactDetailsTab.updateContactDetails(myInfoContactDetails);
+              await myInfoContactDetailsTab.updateContactDetails(myInfoContactDetail.myInfoContactDetails);
                 await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
                 await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-                await openSource_Attachment.addAttachment(myInfoContactDetails_Attachment);
+                await openSource_Attachment.addAttachment(attachment.myInfoContactDetails_Attachment);
                 await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                 await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
               await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.emergencyContacts);
-                await myInfoEmergencyContactsTab.addEmergencyContacts(myInfoEmergencyContacts);
+                await myInfoEmergencyContactsTab.addEmergencyContacts(myInfoEmergencyContact.myInfoEmergencyContacts);
                 await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                    await openSource_Attachment.addAttachment(myInfoEmergencyContacts_Attachment)
+                    await openSource_Attachment.addAttachment(attachment.myInfoEmergencyContacts_Attachment)
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
                 await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.dependents);
-                  await myInfoDependentsTab.addDependents(myInfoDependents);
+                  await myInfoDependentsTab.addDependents(myInfoDependent.myInfoDependents);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                    await openSource_Attachment.addAttachment(myInfoDependents_Attachment)
+                    await openSource_Attachment.addAttachment(attachment.myInfoDependents_Attachment)
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
                 await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.immigration);
-                  await myInfoImmigrationsTab.addImmigration(myInfoImmigration);
+                  await myInfoImmigrationsTab.addImmigration(myInfoImmigration.myInfoImmigrations);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                    await openSource_Attachment.addAttachment(myInfoImmigration_Attachment);
+                    await openSource_Attachment.addAttachment(attachment.myInfoImmigration_Attachment);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
                 await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.qualifications);
-                  await myInfoQualificationsTab.addExperience(experience,);
+                  await myInfoQualificationsTab.addExperience(experience.experiences);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await myInfoQualificationsTab.addEducation(education);
+                  await myInfoQualificationsTab.addEducation(education.educations);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await myInfoQualificationsTab.addSkill(skills);
+                  await myInfoQualificationsTab.addSkill(skill.skills);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await myInfoQualificationsTab.addLanguage(language,);
+                  await myInfoQualificationsTab.addLanguage(language.languages);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await myInfoQualificationsTab.addLicense(license,);
+                  await myInfoQualificationsTab.addLicense(license.licenses);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await openSource_Attachment.addAttachment(myInfoQualifications_Attachment);
+                  await openSource_Attachment.addAttachment(attachment.myInfoQualifications_Attachment);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
                 await openSource_MyInfoTabs.myInfoTabs(myInfoTabName.memberships);
-                  await myInfoMembershipTab.addMembership(myInfoMembership);
+                  await myInfoMembershipTab.addMembership(myInfoMembership.myInfoMemberships);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                  await openSource_Attachment.addAttachment(myInfoMemberships_Attahment);
+                  await openSource_Attachment.addAttachment(attachment.myInfoMemberships_Attahment);
                     await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
       });

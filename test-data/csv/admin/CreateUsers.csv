@@ -1,0 +1,3 @@
+key,userRole,employeeName,status,username,password,confirmPassword
+addAdminUser,Admin,Demo Open Source,Enabled,DemoAdmin,Demo@123,Demo@123
+addNonAdminUser,ESS,Demo Open Source,Enabled,DemoESS,Demo@123,Demo@123

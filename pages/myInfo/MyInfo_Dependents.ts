@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoDependents } from "../../types/MyInfo/MyInfo_Dependents";
+import { MyInfoDependents } from "../../types/MyInfo/Dependents";
 import { BasePage } from "../BasePage";
 
 

@@ -1,6 +1,6 @@
 import { Page, Locator} from "@playwright/test";
-import { MyInfoImmigration } from "../../types/MyInfo/MyInfo_Immigration";
 import { BasePage } from "../BasePage";
+import { MyInfoImmigrations} from "../../types/MyInfo/Immigrations";
 
 export class MyInfoImmigrationsTab extends BasePage{
 private readonly document: Locator
@@ -32,7 +32,7 @@ this.comments = page .locator('.oxd-input-group').filter({ hasText: 'Comments' }
 this.saveImmigrationButton = page.locator('form').filter({ hasText: 'Document' }).getByRole('button',{name: 'Save'});
 
 }
-async addImmigration(data: MyInfoImmigration){
+async addImmigration(data: MyInfoImmigrations){
     await this.click(this.addImmigrationButton);
     const documentId = this.document.filter({hasText: new RegExp(`^${data.document}$`)}).locator('.oxd-radio-input');
     await documentId.setChecked(true);

@@ -1,5 +1,5 @@
 import { Page, Locator} from "@playwright/test";
-import { Education, Experience, Language, License, Skills} from "../../types/MyInfo/MyInfo_Qualifications";
+import { Educations, Experiences, Languages, Licenses, Skills} from "../../types/MyInfo/Qualifications";
 import { BasePage } from "../BasePage";
 
 export class MyInfoQualificationsTab extends BasePage{
@@ -90,7 +90,7 @@ this.expiryDate =page .locator('.oxd-input-group').filter({ hasText: 'Expiry Dat
 this.licenseSaveButton = page.locator('form').filter({ hasText: 'License Type' }).getByRole('button',{name: 'Save'});
     }
 
-async addExperience(data: Experience){
+async addExperience(data: Experiences){
     await this.click(this.addExperienceButton);
     await this.fill(this.company, data.company);
     await this.fill(this.jobTitle, data.jobTitle);
@@ -100,7 +100,7 @@ async addExperience(data: Experience){
     await this.click(this.saveExperienceButton);
 }
 
-async addEducation(data: Education){
+async addEducation(data: Educations){
     await this.click(this.addEducationButton);
     await this.pressSequentially(this.level, data.level);
     await this.selectDropdown.getByRole('option', {name: data.level, exact: true}).click();
@@ -123,7 +123,7 @@ async addSkill(data: Skills){
     await this.click(this.skillsSaveButton);
 }
 
-async addLanguage(data: Language){
+async addLanguage(data: Languages){
     await this.click(this.addLanguageButton);
     await this.click(this.language);
     await this.pressSequentially(this.language, data.language);
@@ -136,7 +136,7 @@ async addLanguage(data: Language){
     await this.click(this.languageSaveButton);
 }
 
-async addLicense(data: License){
+async addLicense(data: Licenses){
     await this.click(this.addLicenseButton);
     await this.pressSequentially(this.licenseType, data.licenseType);
     await this.selectDropdown.getByRole('option', {name: data.licenseType, exact:true}).click();
