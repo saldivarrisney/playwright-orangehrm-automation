@@ -1,4 +1,3 @@
-
 # Playwright
 node_modules/
 /test-results/
@@ -6,11 +5,11 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-<<<<<<< HEAD
 
+# Environment
 .env.qa
+
+# Excluded project files
 OthersFile/
 test-data/Others/
 tests/Open_Source/
-=======
->>>>>>> b349b79a4fbb30d72239a513baeec2380a252eac
