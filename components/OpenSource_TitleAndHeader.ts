@@ -12,7 +12,6 @@ this.page = page;
 
 titleHeader(title: string){
     return this.page.getByRole('heading', { level: 6, name: title });
-    console.log(title);
 }
 errorMessage(warning: string) {
     return this.page.getByRole('heading', { name: warning });

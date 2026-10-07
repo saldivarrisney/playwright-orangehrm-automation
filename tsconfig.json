@@ -9,5 +9,5 @@
   },
   "include": [
     "**/*.ts"
-  ]
+, "test-data/csv/pim/CreateEmployee_MassCreation.csv"  ]
 }

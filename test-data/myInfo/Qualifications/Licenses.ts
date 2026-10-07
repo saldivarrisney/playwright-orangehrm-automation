@@ -1,9 +1,8 @@
 import path from 'path';
-import { readCsv } from '../../utils/csvReader';
+import { Map_readCsv } from '../../../utils/Map_csvReader';
 import { Licenses } from '../../../types/MyInfo/Qualifications';
 
-const licenses = readCsv<Licenses>(
+export const licenses = Map_readCsv<Licenses>(
   path.resolve(__dirname, '../../csv/myInfo/Qualifications/Licenses.csv')
 );
 
-export const license = licenses;

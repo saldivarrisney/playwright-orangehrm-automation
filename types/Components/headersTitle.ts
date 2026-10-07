@@ -8,5 +8,6 @@ export type HeadersTitles = {
    headerMembership: string;
    loginHeader: string;
    headerAdmin: string;
+   pimHeader: string;
 
 }

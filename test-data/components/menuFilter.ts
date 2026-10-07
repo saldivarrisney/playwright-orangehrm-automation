@@ -1,5 +1,6 @@
 export const menuFilter = {
    myInfo: "My Info",
-   admin: "Admin"
+   admin: "Admin",
+   pim: "PIM"
 }
 

@@ -5,6 +5,8 @@ import { OpenSource_MenuFilter } from '../components/OpenSource_MenuFilter';
 import { OpenSource_MyInfoTabs } from '../components/OpenSource_MyInfoTabs';
 import { OpenSource_HeadersAndTitle } from '../components/OpenSource_TitleAndHeader';
 import { OpenSource_ToastMessage } from '../components/OpenSource_ToastMessage';
+import { OpenSource_FormLoader } from '../components/OpenSource_FormLoader';
+
 //pages
 import { AdminFeatures } from '../pages/admin/Admin_UserManagementAddUser';
 import { LoginFeature } from '../pages/login/OpenSource_Login';
@@ -15,8 +17,9 @@ import { MyInfoImmigrationsTab } from '../pages/myInfo/MyInfo_Immigration';
 import { MyInfoMembershipTab } from '../pages/myInfo/MyInfo_Membership';
 import { MyInfoPersonalDetailsTab } from '../pages/myInfo/MyInfo_PersonalDetails';
 import { MyInfoQualificationsTab } from '../pages/myInfo/MyInfo_Qualifications';
-
-
+import { CreationOfEmployee } from '../pages/pim/AddEmployees';
+import { DeleteEmployee } from '../pages/pim/DeleteEmployee';
+import {UpdateEmployee_Features} from '../pages/pim/Update_Employee';
 
 type Fixtures = {
     //components
@@ -24,6 +27,7 @@ type Fixtures = {
     openSource_MenuFilter: OpenSource_MenuFilter;
     openSource_MyInfoTabs: OpenSource_MyInfoTabs;
     openSource_HeadersAndTitle: OpenSource_HeadersAndTitle;
+    openSource_FormLoader: OpenSource_FormLoader
     //type
     adminFeatures:AdminFeatures;
     loginFeature: LoginFeature;
@@ -35,6 +39,10 @@ type Fixtures = {
     myInfoPersonalDetailsTab: MyInfoPersonalDetailsTab;
     myInfoQualificationsTab:MyInfoQualificationsTab;
     openSource_ToastMessage:OpenSource_ToastMessage;
+    creationOfEmployee:CreationOfEmployee;
+    deleteEmployee:DeleteEmployee
+    updateEmployee_Features:UpdateEmployee_Features
+
 
 
 
@@ -42,34 +50,49 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
 
 //components
+        //attachment
     openSource_Attachment: async ({ page }, use) => {
         const openSource_Attachment = new OpenSource_Attachment(page);
         await use(openSource_Attachment );
     },
-    
+        //formLoader
+    openSource_FormLoader: async ({ page }, use) => {
+        const openSource_FormLoader = new OpenSource_FormLoader(page);
+        await use(openSource_FormLoader );
+    },
+        //menuFilter
     openSource_MenuFilter: async ({ page }, use) => {
         const openSource_MenuFilter = new OpenSource_MenuFilter(page);
         await use(openSource_MenuFilter );
     },
+        //myInfoTabs
     openSource_MyInfoTabs: async ({ page }, use) => {
         const openSource_MyInfoTabs = new OpenSource_MyInfoTabs(page);
         await use(openSource_MyInfoTabs );
     },
+        //headersAndTitle
     openSource_HeadersAndTitle: async ({ page }, use) => {
         const openSource_HeadersAndTitle = new OpenSource_HeadersAndTitle(page);
         await use(openSource_HeadersAndTitle );
     },
+        //toastMessage
+        openSource_ToastMessage: async ({ page }, use) => {
+        const openSource_ToastMessage = new OpenSource_ToastMessage(page);
+        await use(openSource_ToastMessage );
+    },
 
     //POM
+        //admin
     adminFeatures: async ({ page }, use) => {
         const adminFeatures = new AdminFeatures(page);
         await use(adminFeatures );
     },
+        //login
     loginFeature: async ({ page }, use) => {
         const loginFeature = new LoginFeature(page);
         await use(loginFeature);
     },
-
+        //myInfo
     myInfoContactDetailsTab: async ({ page }, use) => {
         const myInfoContactDetailsTab = new MyInfoContactDetailsTab(page);
         await use(myInfoContactDetailsTab);
@@ -94,15 +117,24 @@ export const test = base.extend<Fixtures>({
         const myInfoPersonalDetailsTab = new MyInfoPersonalDetailsTab(page);
         await use(myInfoPersonalDetailsTab );
     },
-
     myInfoQualificationsTab: async ({ page }, use) => {
         const myInfoQualificationsTab = new MyInfoQualificationsTab(page);
         await use(myInfoQualificationsTab );
     },
-    openSource_ToastMessage: async ({ page }, use) => {
-        const openSource_ToastMessage = new OpenSource_ToastMessage(page);
-        await use(openSource_ToastMessage );
+        //pim
+    creationOfEmployee: async ({ page }, use) => {
+        const creationOfEmployee = new CreationOfEmployee(page);
+        await use(creationOfEmployee );
     },
+    deleteEmployee: async ({ page }, use) => {
+        const deleteEmployee = new DeleteEmployee(page);
+        await use(deleteEmployee );
+    },
+    updateEmployee_Features: async ({ page }, use) => {
+        const updateEmployee_Features = new UpdateEmployee_Features(page);
+        await use(updateEmployee_Features );
+    },
+
 
 });
 export { expect };

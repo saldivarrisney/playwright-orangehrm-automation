@@ -1,7 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../BasePage";
 
-
 export class LoginFeature extends BasePage{
     private readonly usernameInput: Locator
     private readonly passwordInput: Locator
@@ -18,8 +17,8 @@ constructor (page: Page){
 
 async openPage(){
     await this.navigate('/');
-
 }
+
 async logIn(username: string, password: string){
       await this.fill(this.usernameInput, username)
       await this.fill(this.passwordInput, password)

@@ -1,8 +1,8 @@
 import path from 'path';
-import { readCsv } from '../utils/csvReader';
+import { Map_readCsv } from '../../utils/Map_csvReader';
 import {AddUserData} from '../../types/Admin/Users';
 
-const createUsers = readCsv<AddUserData>(
+const createUsers = Map_readCsv<AddUserData>(
   path.resolve(__dirname, '../csv/admin/CreateUsers.csv')
 );
 

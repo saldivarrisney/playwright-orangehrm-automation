@@ -1,9 +1,11 @@
 import { Page, Locator} from "@playwright/test";
 import {MyInfoPersonalDetails_CustomFields, MyInfoPersonalDetails } from "../../types/MyInfo/PersonalDetails";
 import { BasePage } from "../BasePage";
+import { OpenSource_FormLoader } from "../../components/OpenSource_FormLoader";
 
 
 export class MyInfoPersonalDetailsTab extends BasePage{
+readonly formLoader: OpenSource_FormLoader;
 private readonly firstName: Locator
 private readonly middleName: Locator
 private readonly lastName: Locator
@@ -20,9 +22,9 @@ private readonly bloodType: Locator
 private readonly testField: Locator
 private readonly customFieldsSaveButton: Locator
 
-
     constructor(page: Page){
 super(page);
+this.formLoader = new OpenSource_FormLoader(page);
 this.firstName = page.getByPlaceholder("First Name");
 this.middleName = page.getByPlaceholder("Middle Name");
 this.lastName= page.getByPlaceholder("Last Name");
@@ -42,6 +44,7 @@ this.customFieldsSaveButton = page.locator('form').filter({ hasText: 'Blood' }).
 }
 
 async updatePersonalDetails(data:MyInfoPersonalDetails){
+    await this.waitForVisible(this.firstName);
     await this.click(this.firstName);
     await this.fill(this.firstName, data.firstName);
     await this.fill(this.middleName, data.middleName);
@@ -49,20 +52,42 @@ async updatePersonalDetails(data:MyInfoPersonalDetails){
     await this.fill(this.employeeId, data.employeeId);
     await this.fill(this.otherId, data.otherId);
     await this.fill(this.driverLicense, data.driverLicenseNumber);
+    await this.click(this.licenseExpiry);
     await this.fill(this.licenseExpiry, data.licenseExpiryDate);
+    await this.click(this.nationalityFilter);
     await this.pressSequentially(this.nationalityFilter, data.nationality);
-    await this.selectDropdown.getByRole('option', {name: data.nationality,exact: true }).click();
+    const nationalityOption = this.selectDropdown.getByRole('option', {name: data.nationality,exact: true });
+    await this.waitForVisible(nationalityOption)
+    await this.click(nationalityOption);
+    await this.click(this.maritalFilter);
     await this.pressSequentially(this.maritalFilter, data.maritalStatus);
-    await this.selectDropdown.getByRole('option', {name: data.maritalStatus,exact: true }).click();
+    const maritalStatusOption = this.selectDropdown.getByRole('option', {name: data.maritalStatus,exact: true });
+    await this.waitForVisible(maritalStatusOption)
+    await this.click(maritalStatusOption);
     await this.fill(this.dateBirth, data.dateBirth);
     await this.click(this.personalDetailsSaveButton);
+
 }
 async updateCustomFields(data:MyInfoPersonalDetails_CustomFields){
+    await this.waitForVisible(this.bloodType)
     await this.pressSequentially(this.bloodType, data.bloodType)
-    await this.selectDropdown.getByRole('option', {name: data.bloodType,exact: true }).click();
+    const bloodTypeOption = this.selectDropdown.getByRole('option', {name: data.bloodType,exact: true });
+    await this.waitForVisible(bloodTypeOption)
+    await this.click(bloodTypeOption)
     await this.fill(this.testField, data.testField)
+    await this.waitForFormLoaderToDisappear(this.formLoader.formLoader);
     await this.click(this.customFieldsSaveButton);
+    await this.waitForFormLoaderToDisappear(this.formLoader.formLoader);
+
+
+}
+async verifyTheUpdatedPersonalDetails(firstName: string, lastName: string){
+    await this.reload();
+   return this.page.getByRole('heading', {level: 6, name: `${firstName} ${lastName}`,});
+}
+verifyTheUpdatedCustomFields(bloodType: string){ //returning 1 record with exact/match data
+   return  this.page.locator('.oxd-select-text-input').filter({ has: this.page.getByText(bloodType, {exact: true})});
+}
 }
 
 
-    }

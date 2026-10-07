@@ -2,11 +2,15 @@ import { Page, Locator, expect } from "@playwright/test";
 import {UpdateUserData, AddUserData} from "../../types/Admin/Users";
 import { NavigateCreationOfUser } from "../../types/Components/buttons";
 import { BasePage } from "../BasePage";
-
+import { OpenSource_HeadersAndTitle } from "../../components/OpenSource_TitleAndHeader";
+import { headersTitles } from "../../test-data";
+import { OpenSource_FormLoader } from "../../components/OpenSource_FormLoader";
 
 
 export class AdminFeatures extends BasePage{
     private readonly searchField: Locator
+    readonly formLoader: OpenSource_FormLoader;
+    readonly titleHeader: OpenSource_HeadersAndTitle;
     private readonly headerUserManagementButton: Locator
     private readonly addUserButton: Locator
     private readonly userRole: Locator
@@ -29,6 +33,8 @@ export class AdminFeatures extends BasePage{
 
     constructor(page: Page){
 super(page);
+this.formLoader = new OpenSource_FormLoader(page);
+this.titleHeader = new OpenSource_HeadersAndTitle(page);
 this.searchField = page.getByPlaceholder("Search");
 this.headerUserManagementButton = page.locator('.oxd-topbar-body-nav-tab').filter({hasText: 'User Management'});
 this.addUserButton=page.getByRole('button', {name: 'Add'});
@@ -56,10 +62,25 @@ async navigateCreationOfUser(data:NavigateCreationOfUser){
         const clickUsersHeader = this.page.getByRole('menuitem', {name: data.clickUsersHeader});
             await clickUsersHeader.click();
 }
-async updateUser(data:AddUserData){
-const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username}).locator('.oxd-table-cell-actions').locator('.bi-pencil-fill');
-    await userRowToEdit.click();
+async userRowToEdit(data:AddUserData){
+// const userRowToEdit = this.page.getByRole('row').filter({ hasText: data.username}).locator('.oxd-table-cell-actions').locator('.bi-pencil-fill');
+//     await userRowToEdit.click();
+
+    const userRow = this.page.getByRole('row').filter({ hasText: data.username});
+    await this.waitForVisible(this.selectHeaderCheckbox);
+    while (await userRow.count() === 0) {
+        if (await this.nextPageButton.count() === 0) {
+            throw new Error(`Employee not found: ${data.username}`);
+        }
+        await this.click(this.nextPageButton);
+        await this.waitForVisible(this.selectHeaderCheckbox);
+    }
+    await userRow.locator('.oxd-table-cell-actions').locator('.bi-pencil-fill').click();
+        await this.waitForVisible(this.titleHeader.titleHeader(headersTitles.editUser));
+
 }
+
+
 
 async enterTheNewDataUser(data: UpdateUserData){
     await this.click(this.username);
@@ -68,9 +89,13 @@ async enterTheNewDataUser(data: UpdateUserData){
     await this.fill(this.password, data.updatePassword);
     await this.fill(this.confirmPassword, data.updateConfirmPassword)
     await this.click(this.saveUserButton);
+    await this.waitForFormLoaderToDisappear(this.formLoader.formLoader); 
+    await this.waitForVisible(this.selectHeaderCheckbox);
+
 }
 
  async createUser(data:AddUserData){
+    await this.isVisible(this.addUserButton);
     await this.click(this.addUserButton);
     await this.pressSequentially(this.userRole, data.userRole);
     await this.selectDropdown.getByRole('option', {name: data.userRole}).click();
@@ -82,6 +107,9 @@ async enterTheNewDataUser(data: UpdateUserData){
     await this.fill(this.password, data.password);
     await this.fill(this.confirmPassword, data.confirmPassword);
     await this.click(this.saveUserButton);
+    await this.waitForFormLoaderToDisappear(this.formLoader.formLoader); 
+    await this.waitForVisible(this.selectHeaderCheckbox);
+
 }
 async clickDeleteUser(data:AddUserData)   {
 const userRowToDeleteAndClickButton = this.page.getByRole('row').filter({ hasText: data.username}).locator('.oxd-table-cell-actions').locator('.bi-trash');
@@ -96,7 +124,9 @@ verifyDeletedUser(username: string): Locator {
 }
 verifyTheUpdatedRecord(username: string): Locator {
     return this.page.getByRole('row').filter({hasText: username})
-    
+}
+verifyTheCreatedUser(username: string): Locator {
+    return this.page.getByRole('row').filter({hasText: username})
 }
 async deleteAllUSersRecord()   {
 while(true){

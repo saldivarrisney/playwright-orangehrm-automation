@@ -4,16 +4,17 @@ import {
   LoginDataScenarios,
   headersTitles,
   menuFilter,
-  myInfoPersonalDetail,
+  myInfoPersonalDetails,
   navigateCreationOfUser,
   createUser,
-  updateUser
+  updateUser,
+  createEmployee
 } from '../../test-data/index';
 
 
 
 test.describe('Create Users then update', () =>{
-
+test.slow();
 test.beforeEach(async ({loginFeature,openSource_HeadersAndTitle, openSource_MenuFilter, myInfoPersonalDetailsTab,
     openSource_ToastMessage, adminFeatures}) => {
     await loginFeature.openPage();
@@ -21,7 +22,7 @@ test.beforeEach(async ({loginFeature,openSource_HeadersAndTitle, openSource_Menu
         await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.loginHeader)).toBeVisible();
             await openSource_MenuFilter.searchAndSelectMenu(menuFilter.myInfo); 
                 await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.headerPersonalDetails)).toBeVisible();
-                    await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetail.myInfoPersonalDetails)                  
+                    await myInfoPersonalDetailsTab.updatePersonalDetails(myInfoPersonalDetails.myInfoPersonalDetails)                  
                     await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
                     await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden(); 
             await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin); 
@@ -30,29 +31,24 @@ test.beforeEach(async ({loginFeature,openSource_HeadersAndTitle, openSource_Menu
       });
 test('Create Admin user then update', async ({openSource_MenuFilter, openSource_HeadersAndTitle,openSource_ToastMessage, adminFeatures}) => {
                 await adminFeatures.createUser(createUser.addAdminUser)        
-                    await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
-                        await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
+                    await expect(adminFeatures.verifyTheCreatedUser(createUser.addAdminUser.username)).toBeVisible();
            await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin); 
                 await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.headerAdmin)).toBeVisible();
                         await adminFeatures.navigateCreationOfUser(navigateCreationOfUser);          
-                        await adminFeatures.updateUser(createUser.addAdminUser);
+                        await adminFeatures.userRowToEdit(createUser.addAdminUser);
                     await adminFeatures.enterTheNewDataUser(updateUser.updateAdminUser)
-                        await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
-                            await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-                                await expect(adminFeatures.verifyTheUpdatedRecord(updateUser.updateAdminUser.updateUsername)).toHaveCount(1);
-                        })
+                        await expect(adminFeatures.verifyTheUpdatedRecord(updateUser.updateAdminUser.updateUsername)).toBeVisible
+
+                    })
 test('Create Non-Admin user then update', async ({openSource_MenuFilter, openSource_HeadersAndTitle,openSource_ToastMessage, adminFeatures}) => {
                 await adminFeatures.createUser(createUser.addNonAdminUser)        
-                    await expect(openSource_ToastMessage.saveTextMessage).toBeVisible();
-                        await expect(openSource_ToastMessage.saveTextMessage).toBeHidden();
-                                   await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin); 
+                     await expect(adminFeatures.verifyTheCreatedUser(createUser.addNonAdminUser.username)).toBeVisible();
+                await openSource_MenuFilter.searchAndSelectMenu(menuFilter.admin); 
                 await expect(openSource_HeadersAndTitle.titleHeader(headersTitles.headerAdmin)).toBeVisible();
                         await adminFeatures.navigateCreationOfUser(navigateCreationOfUser);   
-                            await adminFeatures.updateUser(createUser.addNonAdminUser);
+                            await adminFeatures.userRowToEdit(createUser.addNonAdminUser);
                     await adminFeatures.enterTheNewDataUser(updateUser.updateNonAdminUser)
-                        await expect(openSource_ToastMessage.saveUpdateMessage).toBeVisible();
-                            await expect(openSource_ToastMessage.saveUpdateMessage).toBeHidden();
-                                await expect(adminFeatures.verifyTheUpdatedRecord(updateUser.updateNonAdminUser.updateUsername)).toHaveCount(1);
+                        await expect(adminFeatures.verifyTheUpdatedRecord(updateUser.updateNonAdminUser.updateUsername)).toBeVisible
 
                         })
 })

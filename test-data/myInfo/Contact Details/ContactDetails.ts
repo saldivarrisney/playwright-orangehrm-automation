@@ -1,11 +1,8 @@
 import path from 'path';
-import { readCsv } from '../../utils/csvReader';
+import { Map_readCsv } from '../../../utils/Map_csvReader';
 import { MyInfoContactDetails } from '../../../types/MyInfo/ContactDetails';
 
-const myInfoContactDetails = readCsv<MyInfoContactDetails>(
+export const myInfoContactDetails = Map_readCsv<MyInfoContactDetails>(
   path.resolve(__dirname, '../../csv/myInfo/Contact Details/ContactDetails.csv')
-
-
 );
 
-export const myInfoContactDetail = myInfoContactDetails;

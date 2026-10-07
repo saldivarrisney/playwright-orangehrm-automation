@@ -1,0 +1,3 @@
+key, firstName, middleName, lastName, employeeId, profilePic
+adminEmployee, Sandra , Cruz, Santos,EMP123, test-data/files/demo.jpg
+nonAdminEmployee, Leo , Santos, Dela Cruz, EMP124,test-data/files/demo.jpg

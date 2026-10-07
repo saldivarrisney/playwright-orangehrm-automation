@@ -1,9 +1,9 @@
 import path from 'path';
-import { readCsv } from '../../utils/csvReader';
+import { Map_readCsv } from '../../../utils/Map_csvReader';
 import { AttachmentFields } from '../../../types/Components/attachments';
 
 
-const attachments = readCsv<AttachmentFields>(
+const attachments = Map_readCsv<AttachmentFields>(
   path.resolve(__dirname, '../../csv/components/attachments/Attachments.csv')
 );
 

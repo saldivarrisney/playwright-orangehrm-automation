@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { parse } from 'csv-parse/sync';
 
-export function readCsv<T>(filePath: string): Record<string, T> {
+export function Map_readCsv<T>(filePath: string): Record<string, T> {
 
   const fileContent = fs.readFileSync(filePath, 'utf-8');
 
